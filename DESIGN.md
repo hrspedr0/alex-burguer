@@ -20,11 +20,11 @@ Os valores vivem em `css/tokens.css`. Este arquivo explica o porquê.
 
 | Texto / elemento | Fundo | Contraste | Resultado | Uso |
 |---|---|---|---|---|
-| marrom `#2B1810` | laranja `#F26A1B` | 5,52:1 | passa AA | texto corrido, títulos, pontilhado do cardápio, foco |
+| marrom `#2B1810` | laranja `#F26A1B` | 5,52:1 | passa AA | texto corrido, títulos, **descrições do cardápio** (`--texto-menor`), pontilhado, foco |
 | creme `#FFF1DC` | marrom `#2B1810` | 15,21:1 | passa AAA | texto em faixas marrons, botão sobre laranja |
 | mostarda `#FFC83D` | marrom `#2B1810` | 10,94:1 | passa AAA | preço/realce em áreas marrons, foco sobre marrom |
 | marrom `#2B1810` | mostarda `#FFC83D` | 10,94:1 | passa AAA | texto do botão mostarda, selo, etiqueta de preço |
-| kraft `#C9AE8C` | marrom `#2B1810` | 7,99:1 | passa AAA | descrições, horários secundários |
+| kraft `#C9AE8C` | marrom `#2B1810` | 7,99:1 | passa AAA | **aviso do rodapé** (`--texto-menor`), horários no quadro marrom |
 | laranja `#F26A1B` | marrom `#2B1810` | 5,52:1 | passa AA | destaque de texto dentro de área marrom |
 | creme `#FFF1DC` | laranja `#F26A1B` | 2,75:1 | **reprovado** | proibido |
 | branco `#FFFFFF` | laranja `#F26A1B` | 3,06:1 | **reprovado** para texto normal | proibido (regra do projeto) |
