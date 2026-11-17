@@ -1,1 +1,114 @@
-/* Componentes: usam só variáveis de tokens.css. Preenchido no passo 6. */
+/* Componentes: usam só variáveis de tokens.css.
+   Base provisória do passo 5 (só o legível). O visual completo vem no passo 6.
+   Os pontos de quebra (48em) ficam aqui porque media queries não aceitam variáveis CSS. */
+
+body {
+  margin: 0;
+  font-family: var(--fonte-texto);
+  font-size: var(--texto-0);
+  line-height: var(--entrelinha-texto);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--fonte-titulo);
+  font-weight: var(--peso-titulo);
+  line-height: var(--entrelinha-titulo);
+}
+
+.cabecalho,
+main > section,
+.rodape {
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: var(--espaco-3);
+}
+
+.hero h1,
+.passos {
+  max-width: var(--largura-texto);
+}
+
+/* Link de atalho: só aparece ao receber foco pelo teclado */
+.pular {
+  position: absolute;
+  left: var(--espaco-3);
+  top: calc(-1 * var(--espaco-7));
+}
+
+.pular:focus {
+  top: var(--espaco-3);
+}
+
+/* Cardápio estilo comanda: nome ..... preço */
+.comanda__lista {
+  list-style: none;
+  padding: 0;
+  max-width: var(--largura-texto);
+}
+
+.comanda__item p {
+  margin: 0;
+}
+
+.comanda__item + .comanda__item {
+  margin-top: var(--espaco-3);
+}
+
+.comanda__linha {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espaco-2);
+  font-weight: var(--peso-forte);
+}
+
+.comanda__pontos {
+  flex: 1;
+  border-bottom: var(--borda) dotted currentColor;
+}
+
+.comanda__preco {
+  white-space: nowrap;
+}
+
+/* Horários */
+.horarios__dia {
+  display: flex;
+  gap: var(--espaco-2);
+}
+
+.horarios dd {
+  margin: 0;
+}
+
+.horarios__dia--hoje {
+  font-weight: var(--peso-forte);
+}
+
+/* Botão fixo de WhatsApp: só no celular */
+.botao-fixo {
+  display: none;
+}
+
+@media (max-width: 47.99em) {
+  .botao-fixo {
+    position: fixed;
+    inset-inline: var(--espaco-3);
+    bottom: var(--espaco-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--toque-min);
+    border: var(--borda) solid var(--cor-acento);
+    border-radius: var(--raio);
+    background: var(--cor-superficie);
+    color: var(--cor-texto-inverso);
+    font-weight: var(--peso-forte);
+    text-decoration: none;
+  }
+
+  body {
+    padding-bottom: calc(var(--toque-min) + var(--espaco-5));
+  }
+}

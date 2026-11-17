@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Alex Burguer (provisório)</title>
     <meta name="description" content="Alex Burguer: hamburgueria de rua (descrição provisória). Projeto fictício para estudo." />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,8 +14,64 @@
     />
     <link rel="stylesheet" href="css/tokens.css" />
     <link rel="stylesheet" href="css/componentes.css" />
+    <script type="module" src="js/main.js"></script>
   </head>
   <body>
-    <script type="module" src="js/main.js"></script>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <a class="cabecalho__marca" href="#topo" data-campo="nome"></a>
+      <nav aria-label="Seções da página">
+        <ul class="cabecalho__menu">
+          <li><a href="#cardapio">Cardápio</a></li>
+          <li><a href="#como-pedir">Como pedir</a></li>
+          <li><a href="#onde-estamos">Onde estamos</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="conteudo">
+      <section class="hero" id="topo" aria-labelledby="hero-titulo">
+        <h1 id="hero-titulo">Hambúrguer feito na chapa, na hora, para comer aqui ou receber em casa.</h1>
+        <p class="selo" data-selo role="status"></p>
+        <a class="botao" data-link="whatsapp" target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
+        <noscript>
+          <p>Para ver o cardápio, os horários e pedir pelo WhatsApp, ative o JavaScript do navegador.</p>
+        </noscript>
+      </section>
+
+      <section class="secao" id="cardapio" aria-labelledby="cardapio-titulo">
+        <h2 id="cardapio-titulo">Cardápio</h2>
+        <div data-cardapio></div>
+      </section>
+
+      <section class="secao" id="como-pedir" aria-labelledby="como-pedir-titulo">
+        <h2 id="como-pedir-titulo">Como pedir e entrega</h2>
+        <ol class="passos">
+          <li>Toque em “Pedir no WhatsApp”. A mensagem já abre começada: é só escrever o que você quer.</li>
+          <li>Diga se vai retirar no balcão ou receber em casa. Para entrega, mande o endereço com um ponto de referência.</li>
+          <li>Taxa e tempo de entrega: [FICTÍCIO]. A gente confirma os dois na conversa, antes de você fechar o pedido.</li>
+          <li>Formas de pagamento: [FICTÍCIO].</li>
+        </ol>
+      </section>
+
+      <section class="secao" id="onde-estamos" aria-labelledby="onde-estamos-titulo">
+        <h2 id="onde-estamos-titulo">Onde estamos</h2>
+        <address class="endereco">
+          <span data-campo="endereco"></span><br />
+          <span data-campo="cidade"></span>
+        </address>
+        <p><a class="botao-secundario" data-link="mapa" target="_blank" rel="noopener noreferrer">Abrir no mapa</a></p>
+        <h3>Horários</h3>
+        <dl class="horarios" data-horarios></dl>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <p><strong data-campo="nome"></strong> · <span data-campo="cidade"></span></p>
+      <p>Projeto fictício para estudo. Nome, endereço, telefone, horários e preços são inventados.</p>
+    </footer>
+
+    <a class="botao-fixo" data-link="whatsapp" target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
   </body>
 </html>
