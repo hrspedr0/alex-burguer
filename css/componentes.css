@@ -1,12 +1,42 @@
-/* Componentes: usam só variáveis de tokens.css.
-   Base provisória do passo 5 (só o legível). O visual completo vem no passo 6.
-   Os pontos de quebra (48em) ficam aqui porque media queries não aceitam variáveis CSS. */
+/* ==========================================================================
+   Alex Burguer: componentes
+   Usa só variáveis de tokens.css. Celular primeiro; desktop a partir de 48em e 60em.
+   Os pontos de quebra ficam aqui porque media queries não aceitam variáveis CSS.
+   Regra de cor: texto sobre laranja é sempre marrom; creme só sobre marrom.
+   ========================================================================== */
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Fundo marrom fora do body: se a janela for mais alta que a página, continua o rodapé */
+html {
+  background: var(--cor-superficie);
+}
 
 body {
   margin: 0;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
   font-family: var(--fonte-texto);
   font-size: var(--texto-0);
   line-height: var(--entrelinha-texto);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
 }
 
 h1,
@@ -15,78 +45,460 @@ h3 {
   font-family: var(--fonte-titulo);
   font-weight: var(--peso-titulo);
   line-height: var(--entrelinha-titulo);
+  text-wrap: balance;
 }
 
-.cabecalho,
-main > section,
-.rodape {
-  max-width: var(--largura-max);
-  margin-inline: auto;
-  padding-inline: var(--espaco-3);
+a {
+  color: inherit;
 }
 
-.hero h1,
-.passos {
-  max-width: var(--largura-texto);
+/* Foco: a cor muda conforme o fundo (variável --cor-foco definida por contexto) */
+:focus-visible {
+  outline: var(--foco-largura) solid var(--cor-foco);
+  outline-offset: var(--foco-afastamento);
 }
 
-/* Link de atalho: só aparece ao receber foco pelo teclado */
 .pular {
   position: absolute;
+  z-index: 20;
   left: var(--espaco-3);
   top: calc(-1 * var(--espaco-7));
+  padding: var(--espaco-2) var(--espaco-3);
+  background: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
+  --cor-foco: var(--cor-foco-sobre-superficie);
 }
 
 .pular:focus {
   top: var(--espaco-3);
 }
 
-/* Cardápio estilo comanda: nome ..... preço */
-.comanda__lista {
-  list-style: none;
-  padding: 0;
-  max-width: var(--largura-texto);
+/* ---------- Seções: laranja (60%) e marrom (30%) ---------- */
+.secao {
+  padding-block: var(--espaco-6);
 }
 
-.comanda__item p {
+.secao--laranja {
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+.secao--marrom,
+.cabecalho,
+.rodape {
+  background: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
+  --cor-foco: var(--cor-foco-sobre-superficie);
+}
+
+/* Duas seções laranja seguidas: separadas pela borda da chapa */
+.secao--laranja + .secao--laranja {
+  border-top: var(--borda-chapa) solid var(--cor-superficie);
+}
+
+.secao__interno {
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: var(--espaco-3);
+}
+
+.secao__titulo {
+  margin-bottom: var(--espaco-5);
+  font-size: var(--texto-2);
+}
+
+/* ---------- Botões ---------- */
+.botao,
+.botao-secundario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--toque-min);
+  padding: var(--espaco-2) var(--espaco-4);
+  border: var(--borda) solid var(--cor-superficie);
+  border-radius: var(--raio);
+  font-family: var(--fonte-texto);
+  font-size: var(--texto-0);
+  font-weight: var(--peso-forte);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Primário sobre laranja: marrom com texto creme */
+.botao {
+  background: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
+}
+
+.botao:hover {
+  background: var(--cor-acento);
+  color: var(--cor-texto);
+}
+
+/* Secundário sobre laranja: contorno marrom */
+.botao-secundario {
+  background: transparent;
+  color: var(--cor-texto);
+}
+
+.botao-secundario:hover {
+  background: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
+}
+
+/* Primário sobre marrom: mostarda com texto marrom */
+.secao--marrom .botao,
+.rodape .botao {
+  background: var(--cor-acento);
+  border-color: var(--cor-acento);
+  color: var(--cor-texto);
+}
+
+.secao--marrom .botao:hover,
+.rodape .botao:hover {
+  background: transparent;
+  color: var(--cor-acento);
+}
+
+/* Desativado: tracejado, sem preenchimento, sem reação ao mouse */
+:is(.botao, .botao-secundario):is(:disabled, [aria-disabled="true"]),
+:is(.botao, .botao-secundario):is(:disabled, [aria-disabled="true"]):hover {
+  background: transparent;
+  border-color: currentColor;
+  border-style: dashed;
+  color: inherit;
+  cursor: not-allowed;
+}
+
+/* ---------- Cabeçalho ---------- */
+.cabecalho__interno {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-2);
+  padding-block: var(--espaco-2);
+}
+
+.cabecalho__marca {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  min-height: var(--toque-min);
+  color: var(--cor-texto-inverso);
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-1);
+  font-weight: var(--peso-titulo);
+  text-decoration: none;
+}
+
+.cabecalho__simbolo {
+  width: auto;
+  height: var(--altura-simbolo);
+}
+
+.cabecalho__menu {
+  display: flex;
+  flex-wrap: wrap;
   margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.comanda__item + .comanda__item {
-  margin-top: var(--espaco-3);
+.cabecalho__menu a {
+  display: flex;
+  align-items: center;
+  min-height: var(--toque-min);
+  padding-inline: var(--espaco-2);
+  color: var(--cor-texto-inverso);
+  font-size: var(--texto-menor);
+  font-weight: var(--peso-forte);
+  text-decoration: none;
+}
+
+.cabecalho__menu a:hover {
+  color: var(--cor-acento);
+  text-decoration: underline;
+}
+
+/* No celular só a ilustração; o nome continua para leitores de tela */
+@media (max-width: 47.99em) {
+  .cabecalho__nome {
+    position: absolute;
+    width: var(--tamanho-oculto);
+    height: var(--tamanho-oculto);
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* ---------- Hero ---------- */
+.hero__interno {
+  display: grid;
+  grid-template-areas:
+    "marca"
+    "texto";
+  gap: var(--espaco-5);
+}
+
+.hero__texto {
+  grid-area: texto;
+  display: grid;
+  justify-items: start;
+  gap: var(--espaco-4);
+}
+
+.hero h1 {
+  max-width: 22ch;
+  font-size: var(--texto-hero);
+}
+
+.hero__acao {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-3);
+}
+
+.hero__marca {
+  grid-area: marca;
+  justify-self: center;
+  width: min(var(--largura-logo-hero), 100%);
+}
+
+/* ---------- Selo de aberto/fechado: o único movimento da página ---------- */
+.selo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--tamanho-selo);
+  aspect-ratio: 1;
+  padding: var(--espaco-3);
+  border: var(--borda) solid var(--cor-superficie);
+  border-radius: var(--raio-selo);
+  outline: var(--borda) dashed var(--cor-superficie);
+  outline-offset: calc(-1 * var(--espaco-2));
+  color: var(--cor-texto);
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-menor);
+  font-weight: var(--peso-titulo);
+  line-height: var(--entrelinha-titulo);
+  text-align: center;
+  transform: rotate(var(--giro-selo));
+}
+
+.selo:not([data-aberta]) {
+  visibility: hidden;
+}
+
+.selo[data-aberta="sim"] {
+  background: var(--cor-selo-aberto);
+}
+
+.selo[data-aberta="nao"] {
+  background: var(--cor-selo-fechado);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .selo[data-aberta] {
+    animation: carimbo var(--duracao-movimento) ease-out both;
+  }
+}
+
+@keyframes carimbo {
+  from {
+    opacity: 0;
+    transform: scale(1.5) rotate(calc(var(--giro-selo) - 20deg));
+  }
+  to {
+    opacity: 1;
+    transform: rotate(var(--giro-selo));
+  }
+}
+
+/* ---------- Cardápio estilo comanda ---------- */
+.cardapio {
+  display: grid;
+  gap: var(--espaco-6);
+}
+
+.comanda__categoria {
+  display: inline-block;
+  margin-bottom: var(--espaco-4);
+  padding: var(--espaco-1) var(--espaco-3);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
+  font-size: var(--texto-1);
+}
+
+.comanda__lista {
+  display: grid;
+  gap: var(--espaco-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .comanda__linha {
   display: flex;
   align-items: baseline;
   gap: var(--espaco-2);
-  font-weight: var(--peso-forte);
 }
 
+.comanda__nome {
+  flex: 0 1 auto;
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-1);
+  font-weight: var(--peso-titulo);
+  line-height: var(--entrelinha-titulo);
+}
+
+/* A linha pontilhada nunca some: tem largura mínima */
 .comanda__pontos {
-  flex: 1;
-  border-bottom: var(--borda) dotted currentColor;
+  flex: 1 1 var(--espaco-5);
+  min-width: var(--espaco-5);
+  border-bottom: var(--borda) dotted var(--cor-texto);
 }
 
 .comanda__preco {
+  flex: none;
+  padding: 0 var(--espaco-2);
+  border: var(--borda) solid var(--cor-superficie);
+  border-radius: var(--raio);
+  background: var(--cor-acento);
+  color: var(--cor-texto);
+  font-weight: var(--peso-forte);
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
-/* Horários */
+.comanda__descricao {
+  max-width: var(--largura-texto);
+  margin-top: var(--espaco-1);
+  font-size: var(--texto-menor);
+}
+
+/* ---------- Como pedir (seção marrom) ---------- */
+.passos {
+  display: grid;
+  gap: var(--espaco-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: passo;
+}
+
+.passos li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--espaco-3);
+  max-width: var(--largura-texto);
+  counter-increment: passo;
+}
+
+.passos li::before {
+  content: counter(passo);
+  display: grid;
+  place-items: center;
+  width: var(--toque-min);
+  aspect-ratio: 1;
+  border-radius: var(--raio-selo);
+  background: var(--cor-acento);
+  color: var(--cor-texto);
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-1);
+  font-weight: var(--peso-titulo);
+}
+
+/* ---------- Onde estamos ---------- */
+.onde {
+  display: grid;
+  gap: var(--espaco-6);
+}
+
+.endereco {
+  margin-bottom: var(--espaco-4);
+  font-size: var(--texto-1);
+  font-style: normal;
+  font-weight: var(--peso-forte);
+}
+
+.quadro-horarios {
+  padding: var(--espaco-4);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
+}
+
+.quadro-horarios__titulo {
+  margin-bottom: var(--espaco-3);
+  font-size: var(--texto-1);
+}
+
+.horarios {
+  display: grid;
+  gap: var(--espaco-1);
+  margin: 0;
+}
+
 .horarios__dia {
   display: flex;
-  gap: var(--espaco-2);
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  padding: var(--espaco-1) var(--espaco-3);
+  border-radius: var(--raio);
 }
 
 .horarios dd {
   margin: 0;
+  color: var(--cor-apoio);
 }
 
 .horarios__dia--hoje {
+  background: var(--cor-acento);
+  color: var(--cor-texto);
   font-weight: var(--peso-forte);
 }
 
-/* Botão fixo de WhatsApp: só no celular */
+.horarios__dia--hoje dd {
+  color: var(--cor-texto);
+}
+
+/* ---------- Rodapé ---------- */
+.rodape {
+  padding-block: var(--espaco-6);
+}
+
+.rodape__interno {
+  display: grid;
+  justify-items: start;
+  gap: var(--espaco-5);
+}
+
+.rodape__logo {
+  width: var(--largura-logo-rodape);
+}
+
+.rodape__texto {
+  display: grid;
+  justify-items: start;
+  gap: var(--espaco-4);
+}
+
+.rodape__nome {
+  font-size: var(--texto-1);
+}
+
+.rodape__aviso {
+  max-width: var(--largura-texto);
+  color: var(--cor-apoio);
+  font-size: var(--texto-menor);
+}
+
+/* ---------- Botão fixo de WhatsApp (só no celular) ---------- */
 .botao-fixo {
   display: none;
 }
@@ -94,6 +506,7 @@ main > section,
 @media (max-width: 47.99em) {
   .botao-fixo {
     position: fixed;
+    z-index: 10;
     inset-inline: var(--espaco-3);
     bottom: var(--espaco-3);
     display: flex;
@@ -108,7 +521,64 @@ main > section,
     text-decoration: none;
   }
 
-  body {
-    padding-bottom: calc(var(--toque-min) + var(--espaco-5));
+  .botao-fixo:hover {
+    background: var(--cor-acento);
+    color: var(--cor-texto);
+  }
+
+  /* Anel de foco por dentro: mostarda sobre marrom, visível sobre qualquer seção */
+  .botao-fixo:focus-visible {
+    outline-color: var(--cor-acento);
+    outline-offset: calc(-2 * var(--foco-largura));
+  }
+
+  /* Espaço para o botão fixo não cobrir o fim do rodapé */
+  .rodape {
+    padding-bottom: calc(var(--espaco-6) + var(--toque-min) + var(--espaco-4));
+  }
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 48em) {
+  .secao {
+    padding-block: var(--espaco-7);
+  }
+
+  .secao__interno {
+    padding-inline: var(--espaco-5);
+  }
+
+  .hero__interno {
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-areas: "texto marca";
+    align-items: center;
+    gap: var(--espaco-6);
+  }
+
+  .onde {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .rodape__interno {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: var(--espaco-6);
+  }
+}
+
+@media (min-width: 60em) {
+  .cardapio {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--espaco-7);
+  }
+
+  .cardapio > :first-child {
+    grid-row: span 3;
+  }
+
+  .passos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--espaco-6);
   }
 }

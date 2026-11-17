@@ -47,7 +47,7 @@ Consequência: **sobre o laranja só existe uma cor de texto, o marrom**. A hier
 
 ## A coisa memorável
 
-O **selo "aberto agora / abre às 18h"**: adesivo redondo mostarda com borda marrom, perto do título, que muda conforme o horário de Brasília (`js/horario.js`). Responde à pergunta de quem pede delivery à noite antes de ela ser feita. É o único elemento com movimento (um leve giro ao carregar, desligado com `prefers-reduced-motion`).
+O **selo "aberto agora / abre às 18h"**: adesivo redondo (mostarda aberto, kraft fechado) ao lado do botão de pedir, que muda conforme o horário de Brasília (`js/horario.js`). Responde à pergunta de quem pede delivery à noite antes de ela ser feita. É o único elemento com movimento ("carimbo": gira e assenta uma vez ao carregar; desligado com `prefers-reduced-motion`).
 
 Apoio: a logo ilustrada, com as letras de ALEX feitas de ingredientes (ver "Logo: cores de exceção").
 
@@ -65,21 +65,27 @@ A logo (`assets/logo.svg`, `logo-negativo.svg`, `favicon.svg`) é uma ilustraç�
 | `#7FA83A` | alface (verde oliva, puxado para o quente) |
 | `#D93A2A` / `#F07A5C` | tomate e miolo do tomate |
 
-Versões: `logo.svg` para fundo laranja ou creme; `logo-negativo.svg` para fundo marrom (nome em creme e um contorno creme em volta do hambúrguer, como adesivo); `favicon.svg` só com o hambúrguer em camadas, sem letras.
+Versões: `logo.svg` para fundo laranja ou creme; `logo-simbolo.svg` (só a ilustração, contorno creme) para o cabeçalho marrom; `logo-negativo.svg` para fundo marrom (nome em creme e um contorno creme em volta do hambúrguer, como adesivo); `favicon.svg` só com o hambúrguer em camadas, sem letras.
 
 ## Regra 60/30/10 por seção
 
-| Seção | 60% laranja | 30% marrom | 10% mostarda |
+| Seção | Fundo | 30% marrom | 10% mostarda |
 |---|---|---|---|
-| Cabeçalho | - | faixa inteira com o logo | link/botão "Pedir" mostarda |
-| Hero | fundo, título em marrom | botão "Pedir no WhatsApp" (marrom + creme), faixa de base | selo aberto/fechado |
-| Cardápio | fundo, nomes dos itens e pontilhado em marrom | etiquetas das categorias (marrom + creme) | etiqueta de preço (mostarda + marrom) |
-| Como pedir | fundo, texto em marrom | bloco com os passos (marrom + creme/kraft) | marcador de cada passo |
-| Onde estamos | fundo, endereço em marrom | quadro de horários (marrom + creme/kraft) | dia de hoje destacado, botão "Abrir no mapa" |
-| Rodapé | - | faixa inteira (creme + kraft) | link do WhatsApp |
-| Botão fixo (celular) | - | marrom + creme | borda mostarda (separa do rodapé marrom) |
+| Cabeçalho | marrom | faixa inteira; ilustração sem o nome (`logo-simbolo.svg`); nome em texto só no desktop | hover do menu |
+| Hero | laranja | botão "Pedir no WhatsApp" (marrom + creme) | selo aberto (fechado = kraft) |
+| Cardápio | laranja | etiquetas das categorias; borda da chapa separando do hero | etiqueta de preço com borda marrom |
+| Como pedir | **marrom** | seção inteira (creme) | marcador numerado de cada passo |
+| Onde estamos | laranja | quadro de horários (creme/kraft) | dia de hoje |
+| Rodapé | marrom | `logo-negativo.svg`, nome, aviso em kraft | botão "Pedir no WhatsApp" |
+| Botão fixo (celular) | - | marrom + creme | borda mostarda |
 
-Cabeçalho e rodapé são 100% marrom, mas são finos: somados às faixas internas, fecham os 30% da página.
+As seções alternam laranja e marrom a partir do cardápio. Hero e cardápio ficam os dois no laranja, separados por uma borda marrom de 0,5rem (`--borda-chapa`): o cardápio é a seção mais longa, e pintá-lo de marrom levaria o marrom a mais da metade da página.
+
+### Componentes (`css/componentes.css`)
+- **Botão primário**: sobre laranja, marrom + creme (hover: mostarda + marrom); sobre marrom, mostarda + marrom (hover: só contorno mostarda). **Secundário**: contorno marrom (hover: preenchido). **Desativado**: tracejado, sem preenchimento.
+- **Foco**: anel de 3px; `--cor-foco` é marrom em áreas laranja e mostarda em áreas marrons. No botão fixo o anel fica por dentro, para aparecer sobre qualquer seção.
+- **Selo**: adesivo redondo com borda e tracejado marrom, ao lado do botão do hero (não em cima da logo, para não cobrir o X). Aberto = mostarda; fechado = kraft. Texto vem de `statusDaLoja`.
+- **Comanda**: nome · linha pontilhada (largura mínima, nunca some) · etiqueta de preço. Duas colunas a partir de 60em.
 
 ## Fora de propósito
 

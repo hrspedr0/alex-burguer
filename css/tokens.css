@@ -14,9 +14,14 @@
   --cor-acento: #ffc83d;             /* 10%: mostarda, botão sobre marrom, selo, etiqueta de preço */
   --cor-destaque: #f26a1b;           /* laranja como realce de texto dentro de áreas marrons (5,52:1) */
 
+  /* Selo de aberto/fechado (texto sempre --cor-texto: 10,94:1 na mostarda, 7,99:1 no kraft) */
+  --cor-selo-aberto: #ffc83d;        /* mostarda */
+  --cor-selo-fechado: #c9ae8c;       /* kraft, o tom neutro do sistema */
+
   /* Foco do teclado: contraste de pelo menos 3:1 com o que está em volta */
   --cor-foco-sobre-fundo: #2b1810;       /* marrom sobre laranja: 5,52:1 */
   --cor-foco-sobre-superficie: #ffc83d;  /* mostarda sobre marrom: 10,94:1 */
+  --cor-foco: var(--cor-foco-sobre-fundo); /* padrão; áreas marrons trocam pela de superfície */
 
   /* ---------- Tipografia ---------- */
   --fonte-titulo: "Bricolage Grotesque", system-ui, sans-serif;
@@ -31,7 +36,8 @@
   --texto-0: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);           /* corpo */
   --texto-1: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);            /* item do cardápio, subtítulo */
   --texto-2: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem);           /* título de seção */
-  --texto-3: clamp(2.75rem, 1.8rem + 4.5vw, 5.5rem);            /* título principal */
+  --texto-3: clamp(2.75rem, 1.8rem + 4.5vw, 5.5rem);            /* título principal curto */
+  --texto-hero: clamp(2rem, 1.2rem + 3vw, 3.75rem);             /* título do hero (frase longa) */
 
   --entrelinha-texto: 1.55;
   --entrelinha-titulo: 0.95;
@@ -52,6 +58,18 @@
   --borda: 2px;             /* bordas e linha pontilhada do cardápio */
   --foco-largura: 3px;
   --foco-afastamento: 2px;
+  --borda-chapa: 0.5rem;    /* faixa marrom entre duas seções laranja */
+  --tamanho-oculto: 1px;    /* texto só para leitores de tela */
   --toque-min: 2.75rem;     /* 44 px */
   --largura-max: 72rem;
+
+  /* ---------- Marca ---------- */
+  --altura-simbolo: 2.75rem;      /* ilustração no cabeçalho */
+  --largura-logo-hero: 26rem;
+  --largura-logo-rodape: 12rem;
+  --tamanho-selo: clamp(6.5rem, 5.5rem + 4vw, 7.5rem);
+
+  /* ---------- Movimento (só o selo, uma vez) ---------- */
+  --giro-selo: -8deg;
+  --duracao-movimento: 450ms;
 }

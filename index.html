@@ -20,56 +20,86 @@
     <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
     <header class="cabecalho">
-      <a class="cabecalho__marca" href="#topo" data-campo="nome"></a>
-      <nav aria-label="Seções da página">
-        <ul class="cabecalho__menu">
-          <li><a href="#cardapio">Cardápio</a></li>
-          <li><a href="#como-pedir">Como pedir</a></li>
-          <li><a href="#onde-estamos">Onde estamos</a></li>
-        </ul>
-      </nav>
+      <div class="secao__interno cabecalho__interno">
+        <a class="cabecalho__marca" href="#topo">
+          <img class="cabecalho__simbolo" src="assets/logo-simbolo.svg" alt="" width="388" height="309" />
+          <span class="cabecalho__nome" data-campo="nome"></span>
+        </a>
+        <nav aria-label="Seções da página">
+          <ul class="cabecalho__menu">
+            <li><a href="#cardapio">Cardápio</a></li>
+            <li><a href="#como-pedir">Como pedir</a></li>
+            <li><a href="#onde-estamos">Onde estamos</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main id="conteudo">
-      <section class="hero" id="topo" aria-labelledby="hero-titulo">
-        <h1 id="hero-titulo">Hambúrguer feito na chapa, na hora, para comer aqui ou receber em casa.</h1>
-        <p class="selo" data-selo role="status"></p>
-        <a class="botao" data-link="whatsapp" target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
-        <noscript>
-          <p>Para ver o cardápio, os horários e pedir pelo WhatsApp, ative o JavaScript do navegador.</p>
-        </noscript>
+      <section class="secao secao--laranja hero" id="topo" aria-labelledby="hero-titulo">
+        <div class="secao__interno hero__interno">
+          <div class="hero__texto">
+            <h1 id="hero-titulo">Hambúrguer feito na chapa, na hora, para comer aqui ou receber em casa.</h1>
+            <div class="hero__acao">
+              <p class="selo" data-selo role="status"></p>
+              <a class="botao" data-link="whatsapp" target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
+            </div>
+            <noscript>
+              <p>Para ver o cardápio, os horários e pedir pelo WhatsApp, ative o JavaScript do navegador.</p>
+            </noscript>
+          </div>
+          <div class="hero__marca">
+            <img class="hero__logo" src="assets/logo.svg" alt="" width="380" height="398" />
+          </div>
+        </div>
       </section>
 
-      <section class="secao" id="cardapio" aria-labelledby="cardapio-titulo">
-        <h2 id="cardapio-titulo">Cardápio</h2>
-        <div data-cardapio></div>
+      <section class="secao secao--laranja" id="cardapio" aria-labelledby="cardapio-titulo">
+        <div class="secao__interno">
+          <h2 class="secao__titulo" id="cardapio-titulo">Cardápio</h2>
+          <div class="cardapio" data-cardapio></div>
+        </div>
       </section>
 
-      <section class="secao" id="como-pedir" aria-labelledby="como-pedir-titulo">
-        <h2 id="como-pedir-titulo">Como pedir e entrega</h2>
-        <ol class="passos">
-          <li>Toque em “Pedir no WhatsApp”. A mensagem já abre começada: é só escrever o que você quer.</li>
-          <li>Diga se vai retirar no balcão ou receber em casa. Para entrega, mande o endereço com um ponto de referência.</li>
-          <li>Taxa e tempo de entrega: [FICTÍCIO]. A gente confirma os dois na conversa, antes de você fechar o pedido.</li>
-          <li>Formas de pagamento: [FICTÍCIO].</li>
-        </ol>
+      <section class="secao secao--marrom" id="como-pedir" aria-labelledby="como-pedir-titulo">
+        <div class="secao__interno">
+          <h2 class="secao__titulo" id="como-pedir-titulo">Como pedir e entrega</h2>
+          <ol class="passos" role="list">
+            <li>Toque em “Pedir no WhatsApp”. A mensagem já abre começada: é só escrever o que você quer.</li>
+            <li>Diga se vai retirar no balcão ou receber em casa. Para entrega, mande o endereço com um ponto de referência.</li>
+            <li>Taxa e tempo de entrega: [FICTÍCIO]. A gente confirma os dois na conversa, antes de você fechar o pedido.</li>
+            <li>Formas de pagamento: [FICTÍCIO].</li>
+          </ol>
+        </div>
       </section>
 
-      <section class="secao" id="onde-estamos" aria-labelledby="onde-estamos-titulo">
-        <h2 id="onde-estamos-titulo">Onde estamos</h2>
-        <address class="endereco">
-          <span data-campo="endereco"></span><br />
-          <span data-campo="cidade"></span>
-        </address>
-        <p><a class="botao-secundario" data-link="mapa" target="_blank" rel="noopener noreferrer">Abrir no mapa</a></p>
-        <h3>Horários</h3>
-        <dl class="horarios" data-horarios></dl>
+      <section class="secao secao--laranja" id="onde-estamos" aria-labelledby="onde-estamos-titulo">
+        <div class="secao__interno onde">
+          <div class="onde__endereco">
+            <h2 class="secao__titulo" id="onde-estamos-titulo">Onde estamos</h2>
+            <address class="endereco">
+              <span data-campo="endereco"></span><br />
+              <span data-campo="cidade"></span>
+            </address>
+            <a class="botao-secundario" data-link="mapa" target="_blank" rel="noopener noreferrer">Abrir no mapa</a>
+          </div>
+          <div class="quadro-horarios">
+            <h3 class="quadro-horarios__titulo">Horários</h3>
+            <dl class="horarios" data-horarios></dl>
+          </div>
+        </div>
       </section>
     </main>
 
     <footer class="rodape">
-      <p><strong data-campo="nome"></strong> · <span data-campo="cidade"></span></p>
-      <p>Projeto fictício para estudo. Nome, endereço, telefone, horários e preços são inventados.</p>
+      <div class="secao__interno rodape__interno">
+        <img class="rodape__logo" src="assets/logo-negativo.svg" alt="" width="380" height="398" loading="lazy" />
+        <div class="rodape__texto">
+          <p class="rodape__nome"><strong data-campo="nome"></strong> · <span data-campo="cidade"></span></p>
+          <a class="botao" data-link="whatsapp" target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
+          <p class="rodape__aviso">Projeto fictício para estudo. Nome, endereço, telefone, horários e preços são inventados.</p>
+        </div>
+      </div>
     </footer>
 
     <a class="botao-fixo" data-link="whatsapp" target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
