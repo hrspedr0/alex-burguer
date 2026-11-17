@@ -1,4 +1,4 @@
-# Briefing: Alex'burguer
+# Briefing: Alex Burguer
 
 Perfil: comercial (simulado, cliente fictício para praticar o processo completo)
 

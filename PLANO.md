@@ -1,4 +1,4 @@
-# Plano passo a passo: site do Alex'burguer
+# Plano passo a passo: site do Alex Burguer
 
 Cada passo tem um prompt para colar no Claude do VS Code, um critério de "pronto" e a mensagem de commit.
 Faça um passo por vez, confira o resultado no navegador e só então avance. Se algo vier errado, cole o erro ou descreva o que viu e peça o ajuste antes de seguir.
@@ -47,7 +47,7 @@ Commit: `chore: estrutura inicial do projeto`
 
 Prompt:
 ```
-Crie o sistema de design do Alex'burguer seguindo as decisões do CLAUDE.md.
+Crie o sistema de design do Alex Burguer seguindo as decisões do CLAUDE.md.
 1) css/tokens.css com variáveis por função: cores (fundo, superfície, texto, apoio, acento, destaque),
    tipografia (fonte-titulo, fonte-texto, escala fluida com clamp), espaçamento (escala única),
    raio (UM valor principal) e largura máxima.
@@ -66,10 +66,10 @@ Commit: `feat: tokens de design e documentação visual`
 
 Prompt:
 ```
-Crie a logo do Alex'burguer em SVG, em assets/logo.svg, e uma versão compacta em assets/favicon.svg.
+Crie a logo do Alex Burguer em SVG, em assets/logo.svg, e uma versão compacta em assets/favicon.svg.
 Conceito: a palavra "alex" em minúsculas bem pesadas, funcionando como o hambúrguer.
 Pão de cima com topo arredondado e gergelim, as letras como a carne, pão de baixo reto.
-"Alex'burguer" completo, pequeno, abaixo. Use as cores dos tokens (laranja, marrom, mostarda, creme).
+"Alex Burguer" completo, pequeno, abaixo. Use as cores dos tokens (laranja, marrom, mostarda, creme).
 Converta o texto em curvas (paths) para a logo não depender de fonte instalada.
 Gere uma página de teste logo-teste.html mostrando a logo em fundo laranja, marrom e creme,
 em tamanho grande e pequeno (32 px), para eu avaliar. Não use a logo no site ainda.

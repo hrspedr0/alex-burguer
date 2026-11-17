@@ -1,4 +1,4 @@
-# Alex'burguer
+# Alex Burguer
 
 Landing page de uma hamburgueria de rua fictícia. Projeto para estudo.
 

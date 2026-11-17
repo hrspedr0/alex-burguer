@@ -1,4 +1,4 @@
-# Alex'burguer: sistema de design
+# Alex Burguer: sistema de design
 
 **Direção visual:** a chapa acesa à noite numa esquina de bairro: laranja de brasa, marrom de chapa queimada, mostarda de bisnaga, com letreiro pesado e cardápio de comanda.
 
@@ -49,7 +49,23 @@ Consequência: **sobre o laranja só existe uma cor de texto, o marrom**. A hier
 
 O **selo "aberto agora / abre às 18h"**: adesivo redondo mostarda com borda marrom, perto do título, que muda conforme o horário de Brasília (`js/horario.js`). Responde à pergunta de quem pede delivery à noite antes de ela ser feita. É o único elemento com movimento (um leve giro ao carregar, desligado com `prefers-reduced-motion`).
 
-Apoio: o logo "alex" em SVG montado como hambúrguer (pão com gergelim, letras como carne, pão de baixo).
+Apoio: a logo ilustrada, com as letras de ALEX feitas de ingredientes (ver "Logo: cores de exceção").
+
+## Logo: cores de exceção
+
+A logo (`assets/logo.svg`, `logo-negativo.svg`, `favicon.svg`) é uma ilustração: hambúrguer de lado em que cada letra de ALEX é um ingrediente (A de queijo, L de carne, E de bacon sobre alface, X de fritas com tomate atrás). Contorno marrom `#2B1810` grosso, cores planas. Além dos 4 tokens, ela usa estas cores, **só dentro da ilustração**. Elas nunca entram no `tokens.css` nem no resto do site:
+
+| Cor | Uso |
+|---|---|
+| `#F5A54A` | pão (tostado, entre o laranja e a mostarda) |
+| `#FFD27A` | brilho único do pão |
+| `#FFD866` | queijo derretido sobre o A |
+| `#8A4426` | carne (mais clara que o contorno, para se separar dele) |
+| `#C9503A` | bacon |
+| `#7FA83A` | alface (verde oliva, puxado para o quente) |
+| `#D93A2A` / `#F07A5C` | tomate e miolo do tomate |
+
+Versões: `logo.svg` para fundo laranja ou creme; `logo-negativo.svg` para fundo marrom (nome em creme e um contorno creme em volta do hambúrguer, como adesivo); `favicon.svg` só com o hambúrguer em camadas, sem letras.
 
 ## Regra 60/30/10 por seção
 

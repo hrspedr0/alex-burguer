@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Teste da logo: Alex Burguer</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <style>
+      /* Página só para avaliação da logo. Usa apenas variáveis do tokens.css. */
+      body {
+        margin: 0;
+        font-family: var(--fonte-texto);
+        background: var(--cor-superficie);
+        color: var(--cor-texto-inverso);
+      }
+      .faixa {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        gap: var(--espaco-6);
+        padding: var(--espaco-6) var(--espaco-3);
+      }
+      .faixa h2 {
+        flex-basis: 100%;
+        margin: 0;
+        font-size: var(--texto-menor);
+      }
+      .laranja { background: var(--cor-fundo); color: var(--cor-texto); }
+      .marrom { background: var(--cor-superficie); color: var(--cor-texto-inverso); }
+      .creme { background: var(--cor-texto-inverso); color: var(--cor-texto); }
+      figure { margin: 0; display: grid; gap: var(--espaco-2); justify-items: start; }
+      figcaption { font-size: var(--texto-menor); }
+      .grande { width: min(26rem, 100%); height: auto; }
+      .pequena { height: 32px; width: auto; }
+      .favicon { width: 32px; height: 32px; }
+    </style>
+  </head>
+  <body>
+    <section class="faixa laranja">
+      <h2>Fundo laranja: logo.svg</h2>
+      <figure><img class="grande" src="assets/logo.svg" alt="Alex Burguer" /><figcaption>grande</figcaption></figure>
+      <figure><img class="pequena" src="assets/logo.svg" alt="Alex Burguer" /><figcaption>32 px de altura</figcaption></figure>
+      <figure><img class="favicon" src="assets/favicon.svg" alt="Alex Burguer" /><figcaption>favicon 32 px</figcaption></figure>
+    </section>
+
+    <section class="faixa marrom">
+      <h2>Fundo marrom: logo-negativo.svg</h2>
+      <figure><img class="grande" src="assets/logo-negativo.svg" alt="Alex Burguer" /><figcaption>grande</figcaption></figure>
+      <figure><img class="pequena" src="assets/logo-negativo.svg" alt="Alex Burguer" /><figcaption>32 px de altura</figcaption></figure>
+      <figure><img class="favicon" src="assets/favicon.svg" alt="Alex Burguer" /><figcaption>favicon 32 px</figcaption></figure>
+    </section>
+
+    <section class="faixa creme">
+      <h2>Fundo creme: logo.svg</h2>
+      <figure><img class="grande" src="assets/logo.svg" alt="Alex Burguer" /><figcaption>grande</figcaption></figure>
+      <figure><img class="pequena" src="assets/logo.svg" alt="Alex Burguer" /><figcaption>32 px de altura</figcaption></figure>
+      <figure><img class="favicon" src="assets/favicon.svg" alt="Alex Burguer" /><figcaption>favicon 32 px</figcaption></figure>
+    </section>
+  </body>
+</html>

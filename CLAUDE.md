@@ -1,4 +1,4 @@
-# Alex'burguer: regras do projeto
+# Alex Burguer: regras do projeto
 
 Perfil: comercial (simulado, cliente fictício)
 
