@@ -1,0 +1,9 @@
+{
+  "name": "alex-burguer",
+  "private": true,
+  "description": "Landing page da hamburgueria fictícia Alex Burguer. Sem dependências.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}
