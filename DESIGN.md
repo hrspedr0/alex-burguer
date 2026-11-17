@@ -1,0 +1,75 @@
+# Alex'burguer: sistema de design
+
+**Direção visual:** a chapa acesa à noite numa esquina de bairro: laranja de brasa, marrom de chapa queimada, mostarda de bisnaga, com letreiro pesado e cardápio de comanda.
+
+Os valores vivem em `css/tokens.css`. Este arquivo explica o porquê.
+
+## Cores
+
+| Token | Cor | Papel | Proporção |
+|---|---|---|---|
+| `--cor-fundo` | `#F26A1B` laranja brasa | fundo das áreas principais | 60% |
+| `--cor-superficie` | `#2B1810` marrom chapa | faixas, blocos, botões sobre o laranja | 30% |
+| `--cor-acento` | `#FFC83D` mostarda | botão sobre marrom, selo, etiqueta de preço | 10% |
+| `--cor-texto` | `#2B1810` | texto sobre laranja e sobre mostarda | - |
+| `--cor-texto-inverso` | `#FFF1DC` creme | texto sobre marrom (só aí) | - |
+| `--cor-apoio` | `#C9AE8C` kraft | texto secundário sobre marrom | - |
+| `--cor-destaque` | `#F26A1B` | realce de texto dentro de áreas marrons | - |
+
+### Pares testados (WCAG 2.x, calculados por script)
+
+| Texto / elemento | Fundo | Contraste | Resultado | Uso |
+|---|---|---|---|---|
+| marrom `#2B1810` | laranja `#F26A1B` | 5,52:1 | passa AA | texto corrido, títulos, pontilhado do cardápio, foco |
+| creme `#FFF1DC` | marrom `#2B1810` | 15,21:1 | passa AAA | texto em faixas marrons, botão sobre laranja |
+| mostarda `#FFC83D` | marrom `#2B1810` | 10,94:1 | passa AAA | preço/realce em áreas marrons, foco sobre marrom |
+| marrom `#2B1810` | mostarda `#FFC83D` | 10,94:1 | passa AAA | texto do botão mostarda, selo, etiqueta de preço |
+| kraft `#C9AE8C` | marrom `#2B1810` | 7,99:1 | passa AAA | descrições, horários secundários |
+| laranja `#F26A1B` | marrom `#2B1810` | 5,52:1 | passa AA | destaque de texto dentro de área marrom |
+| creme `#FFF1DC` | laranja `#F26A1B` | 2,75:1 | **reprovado** | proibido |
+| branco `#FFFFFF` | laranja `#F26A1B` | 3,06:1 | **reprovado** para texto normal | proibido (regra do projeto) |
+| mostarda `#FFC83D` | laranja `#F26A1B` | 1,98:1 | **reprovado** até para borda (3:1) | proibido; mostarda sobre laranja só com borda marrom |
+| `#4A2A1A` / `#5C3422` | laranja | 4,19 / 3,48:1 | **reprovado** | descartados como "apoio" sobre laranja |
+
+Consequência: **sobre o laranja só existe uma cor de texto, o marrom**. A hierarquia ali vem de tamanho e peso, não de um cinza mais claro.
+
+## Tipografia
+
+- **Bricolage Grotesque 800** (`--fonte-titulo`): grotesca de contraste irregular, com cara de letreiro pintado à mão. No peso extra-bold ela vira massa, que é o que o logo "alex" precisa (letras como a carne do hambúrguer).
+- **Figtree 400/700** (`--fonte-texto`): geométrica simples e muito legível em tela pequena, para preços e descrições. Não compete com o título.
+- Carregadas pelo Google Fonts com `display=swap`. Escala fluida com `clamp()` de 320 px a 1280 px. Texto corrido limitado a `65ch`.
+
+## Forma
+
+- **`--raio: 0.25rem` (4 px)**: canto de papelão cortado e de etiqueta de preço. Um raio de 0 fica frio demais, e 12 a 16 px lembra aplicativo de banco. 4 px tira a aresta sem amaciar a marca de rua.
+- Exceção única: `--raio-selo: 50%`, porque o selo de aberto/fechado é um adesivo redondo.
+- Bordas de 2 px em marrom, sem sombras suaves: separação por cor e traço, como embalagem impressa.
+
+## A coisa memorável
+
+O **selo "aberto agora / abre às 18h"**: adesivo redondo mostarda com borda marrom, perto do título, que muda conforme o horário de Brasília (`js/horario.js`). Responde à pergunta de quem pede delivery à noite antes de ela ser feita. É o único elemento com movimento (um leve giro ao carregar, desligado com `prefers-reduced-motion`).
+
+Apoio: o logo "alex" em SVG montado como hambúrguer (pão com gergelim, letras como carne, pão de baixo).
+
+## Regra 60/30/10 por seção
+
+| Seção | 60% laranja | 30% marrom | 10% mostarda |
+|---|---|---|---|
+| Cabeçalho | - | faixa inteira com o logo | link/botão "Pedir" mostarda |
+| Hero | fundo, título em marrom | botão "Pedir no WhatsApp" (marrom + creme), faixa de base | selo aberto/fechado |
+| Cardápio | fundo, nomes dos itens e pontilhado em marrom | etiquetas das categorias (marrom + creme) | etiqueta de preço (mostarda + marrom) |
+| Como pedir | fundo, texto em marrom | bloco com os passos (marrom + creme/kraft) | marcador de cada passo |
+| Onde estamos | fundo, endereço em marrom | quadro de horários (marrom + creme/kraft) | dia de hoje destacado, botão "Abrir no mapa" |
+| Rodapé | - | faixa inteira (creme + kraft) | link do WhatsApp |
+| Botão fixo (celular) | - | marrom + creme | borda mostarda (separa do rodapé marrom) |
+
+Cabeçalho e rodapé são 100% marrom, mas são finos: somados às faixas internas, fecham os 30% da página.
+
+## Fora de propósito
+
+- Modo escuro separado: a paleta já é quente e escura nas áreas marrons; o briefing não pede.
+- Fotos como fundo do hero: ainda não há fotos, e texto sobre foto derruba contraste.
+- Sombras, gradientes e cards iguais em grade: o cardápio é lista de comanda.
+- Texto branco ou creme sobre laranja; mostarda sobre laranja sem borda.
+- Animação de entrada por seção: o único movimento é o selo.
+- Rótulos em caixa-alta antes dos títulos e numeração decorativa.

@@ -1,1 +1,57 @@
-/* Tokens do design: cores, fontes, tamanhos e espaçamentos por função. Preenchido no passo 2. */
+/* ==========================================================================
+   Alex'burguer: tokens do design
+   Única fonte de cores, fontes, tamanhos e espaçamentos.
+   Nomes por função. Contrastes calculados e registrados no DESIGN.md.
+   ========================================================================== */
+
+:root {
+  /* ---------- Cores (regra 60/30/10) ---------- */
+  --cor-fundo: #f26a1b;              /* 60%: laranja brasa, fundo das áreas principais */
+  --cor-superficie: #2b1810;         /* 30%: marrom chapa, faixas, blocos e botões sobre o fundo */
+  --cor-texto: #2b1810;              /* texto sobre --cor-fundo (5,52:1) e sobre --cor-acento (10,94:1) */
+  --cor-texto-inverso: #fff1dc;      /* creme: texto sobre --cor-superficie (15,21:1). Nunca sobre o fundo */
+  --cor-apoio: #c9ae8c;              /* kraft: texto secundário sobre --cor-superficie (7,99:1) */
+  --cor-acento: #ffc83d;             /* 10%: mostarda, botão sobre marrom, selo, etiqueta de preço */
+  --cor-destaque: #f26a1b;           /* laranja como realce de texto dentro de áreas marrons (5,52:1) */
+
+  /* Foco do teclado: contraste de pelo menos 3:1 com o que está em volta */
+  --cor-foco-sobre-fundo: #2b1810;       /* marrom sobre laranja: 5,52:1 */
+  --cor-foco-sobre-superficie: #ffc83d;  /* mostarda sobre marrom: 10,94:1 */
+
+  /* ---------- Tipografia ---------- */
+  --fonte-titulo: "Bricolage Grotesque", system-ui, sans-serif;
+  --fonte-texto: "Figtree", system-ui, sans-serif;
+
+  --peso-titulo: 800;
+  --peso-texto: 400;
+  --peso-forte: 700;
+
+  /* Escala fluida de 320 px a 1280 px */
+  --texto-menor: clamp(0.875rem, 0.85rem + 0.125vw, 0.9375rem); /* legendas, avisos */
+  --texto-0: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);           /* corpo */
+  --texto-1: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);            /* item do cardápio, subtítulo */
+  --texto-2: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem);           /* título de seção */
+  --texto-3: clamp(2.75rem, 1.8rem + 4.5vw, 5.5rem);            /* título principal */
+
+  --entrelinha-texto: 1.55;
+  --entrelinha-titulo: 0.95;
+  --largura-texto: 65ch;
+
+  /* ---------- Espaçamento: escala única ---------- */
+  --espaco-1: 0.25rem;
+  --espaco-2: 0.5rem;
+  --espaco-3: 1rem;     /* margem lateral mínima no celular */
+  --espaco-4: 1.5rem;
+  --espaco-5: 2rem;
+  --espaco-6: 3rem;
+  --espaco-7: 5rem;     /* respiro entre seções no desktop */
+
+  /* ---------- Forma ---------- */
+  --raio: 0.25rem;          /* valor principal: canto de papelão cortado (ver DESIGN.md) */
+  --raio-selo: 50%;         /* exceção única: o selo de aberto/fechado é redondo */
+  --borda: 2px;             /* bordas e linha pontilhada do cardápio */
+  --foco-largura: 3px;
+  --foco-afastamento: 2px;
+  --toque-min: 2.75rem;     /* 44 px */
+  --largura-max: 72rem;
+}
