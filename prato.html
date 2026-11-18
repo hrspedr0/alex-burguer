@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prato | Alex Burguer</title>
+    <meta name="description" content="Detalhes do prato no cardápio do Alex Burguer. Projeto fictício para estudo." />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Figtree:wght@400;500;700&display=swap"
+    />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/componentes.css" />
+    <script type="module" src="js/prato.js"></script>
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <div class="secao__interno cabecalho__interno">
+        <a class="cabecalho__marca" href="index.html">
+          <img class="cabecalho__simbolo" src="assets/logo-simbolo.svg" alt="" width="388" height="309" />
+          <span class="cabecalho__nome" data-campo="nome"></span>
+        </a>
+        <nav aria-label="Seções do site">
+          <ul class="cabecalho__menu">
+            <li><a href="index.html#cardapio">Cardápio</a></li>
+            <li><a href="index.html#como-pedir">Como pedir</a></li>
+            <li><a href="index.html#onde-estamos">Onde estamos</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <noscript>
+      <p class="secao__interno">Para ver este prato, ative o JavaScript ou <a href="index.html">volte à página inicial</a>.</p>
+    </noscript>
+
+    <main id="conteudo" hidden>
+      <section class="secao secao--laranja detalhe" aria-labelledby="prato-nome">
+        <div class="secao__interno">
+          <a class="detalhe__voltar" href="index.html#cardapio">Voltar ao cardápio</a>
+          <div class="detalhe__grade">
+            <div class="detalhe__foto" data-prato-imagem></div>
+            <div class="detalhe__texto">
+              <h1 class="detalhe__nome" id="prato-nome" data-prato-nome></h1>
+              <p class="detalhe__descricao" data-prato-descricao></p>
+              <p class="comanda__preco detalhe__preco" data-prato-preco></p>
+              <h2 class="detalhe__subtitulo">O que vem nessa mordida</h2>
+              <ul class="ingredientes" data-prato-ingredientes></ul>
+              <a class="botao botao--fixo-celular" data-prato-pedido target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="secao secao--laranja" aria-labelledby="veja-tambem-titulo">
+        <div class="secao__interno">
+          <h2 class="secao__titulo" id="veja-tambem-titulo">Veja também</h2>
+          <p class="cardapio__nota">Imagens geradas por IA, ilustrativas.</p>
+          <ul class="destaques destaques--sem-margem" data-prato-outros aria-label="Outros pratos"></ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <div class="secao__interno rodape__interno">
+        <img class="rodape__logo" src="assets/logo-negativo.svg" alt="" width="380" height="398" loading="lazy" />
+        <div class="rodape__texto">
+          <p class="rodape__nome"><strong data-campo="nome"></strong> · <span data-campo="cidade"></span></p>
+          <p class="rodape__aviso">Projeto fictício para estudo. Nome, endereço, telefone, horários e preços são inventados. Imagens geradas por IA, ilustrativas.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

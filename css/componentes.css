@@ -349,31 +349,28 @@ a {
   text-align: center;
 }
 
-/* O botão envolve a imagem; a camada ::after estende o clique ao item inteiro */
-.destaque__botao {
-  display: block;
-  width: 100%;
-  min-height: var(--toque-min);
-  padding: 0;
-  border: 0;
-  background: none;
+/* O link fica no nome; a camada ::after estende o clique ao item inteiro */
+.destaque__link {
   color: inherit;
-  cursor: pointer;
-  touch-action: manipulation;
+  text-decoration: none;
 }
 
-.destaque__botao::after {
+.destaque__link:hover {
+  text-decoration: underline;
+}
+
+.destaque__link::after {
   content: "";
   position: absolute;
   inset: calc(-1 * var(--espaco-1));
   border-radius: var(--raio);
 }
 
-.destaque__botao:focus-visible {
+.destaque__link:focus-visible {
   outline: none;
 }
 
-.destaque__botao:focus-visible::after {
+.destaque__link:focus-visible::after {
   outline: var(--foco-largura) solid var(--cor-foco);
   outline-offset: var(--foco-afastamento);
 }
@@ -392,7 +389,8 @@ a {
 }
 
 /* Assinatura: o contorno marrom separa a mostarda do laranja */
-.destaque__nome::after {
+.destaque__nome::after,
+.detalhe__nome::after {
   content: "";
   display: block;
   width: var(--largura-traco-prato);
@@ -408,14 +406,21 @@ a {
   font-weight: var(--peso-medio);
 }
 
-/* Só transform individual: o movimento não altera o layout nem os vizinhos */
+/* Só transform individual: o movimento não altera o layout nem atrasa o link */
 @media (prefers-reduced-motion: no-preference) {
-  .destaque__botao.esta-pulando .destaque__imagem {
-    animation: pulo-prato var(--duracao-pulo) var(--curva-pulo);
+  .destaque__imagem {
+    transition:
+      scale var(--duracao-pressao) var(--curva-prato),
+      rotate var(--duracao-pressao) var(--curva-prato);
   }
 
-  .destaque:has(.esta-pulando) {
+  .destaque:active {
     z-index: 1;
+  }
+
+  .destaque:active .destaque__imagem {
+    scale: var(--escala-pulo);
+    rotate: var(--giro-pulo);
   }
 }
 
@@ -423,20 +428,103 @@ a {
   .destaque__imagem {
     transition:
       translate var(--duracao-hover-prato) ease-out,
-      filter var(--duracao-hover-prato) ease-out;
+      filter var(--duracao-hover-prato) ease-out,
+      scale var(--duracao-pressao) var(--curva-prato),
+      rotate var(--duracao-pressao) var(--curva-prato);
   }
 
-  .destaque__botao:hover .destaque__imagem {
+  .destaque:hover .destaque__imagem {
     translate: 0 calc(-1 * var(--subida-prato));
     filter: var(--sombra-prato-destaque);
   }
 }
 
-@keyframes pulo-prato {
-  45% {
-    scale: var(--escala-pulo);
-    rotate: var(--giro-pulo);
-  }
+.destaques--sem-margem {
+  margin-bottom: 0;
+}
+
+/* ---------- Página do prato ---------- */
+.detalhe {
+  border-bottom: var(--borda-chapa) solid var(--cor-superficie);
+}
+
+.detalhe__voltar {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque-min);
+  margin-bottom: var(--espaco-3);
+  font-weight: var(--peso-forte);
+}
+
+.detalhe__grade {
+  display: grid;
+  gap: var(--espaco-5);
+}
+
+.detalhe__imagem {
+  width: 100%;
+  height: var(--altura-prato-detalhe-celular);
+  object-fit: contain;
+  filter: var(--sombra-prato-hero);
+}
+
+.detalhe__texto {
+  display: grid;
+  justify-items: start;
+  gap: var(--espaco-4);
+}
+
+.detalhe__nome {
+  font-size: var(--texto-hero);
+}
+
+.detalhe__nome::after {
+  margin-inline: 0;
+  margin-top: var(--espaco-3);
+}
+
+.detalhe__descricao {
+  max-width: var(--largura-texto);
+  font-size: var(--texto-1);
+  line-height: var(--entrelinha-texto);
+}
+
+.detalhe__preco {
+  font-size: var(--texto-1);
+}
+
+.detalhe__subtitulo {
+  margin-bottom: calc(-1 * var(--espaco-2));
+  font-size: var(--texto-1);
+}
+
+.ingredientes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-1) var(--espaco-2);
+  margin: 0;
+  padding: 0;
+  font-weight: var(--peso-medio);
+  list-style: none;
+}
+
+.ingredientes__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+}
+
+/* Estrela decorativa: o contorno marrom separa a mostarda do laranja */
+.ingredientes__estrela {
+  flex: none;
+  width: var(--tamanho-estrela);
+  height: var(--tamanho-estrela);
+  overflow: visible;
+  fill: var(--cor-acento);
+  stroke: var(--cor-superficie);
+  stroke-width: var(--traco-estrela);
+  stroke-linejoin: round;
 }
 
 /* ---------- Cardápio estilo comanda ---------- */
@@ -628,7 +716,8 @@ a {
     scroll-padding-bottom: calc(var(--toque-min) + var(--espaco-5));
   }
 
-  .botao-fixo {
+  .botao-fixo,
+  .botao--fixo-celular {
     position: fixed;
     z-index: 10;
     inset-inline: var(--espaco-3);
@@ -645,13 +734,15 @@ a {
     text-decoration: none;
   }
 
-  .botao-fixo:hover {
+  .botao-fixo:hover,
+  .botao--fixo-celular:hover {
     background: var(--cor-acento);
     color: var(--cor-texto);
   }
 
   /* Anel de foco por dentro: mostarda sobre marrom, visível sobre qualquer seção */
-  .botao-fixo:focus-visible {
+  .botao-fixo:focus-visible,
+  .botao--fixo-celular:focus-visible {
     outline-color: var(--cor-acento);
     outline-offset: calc(-2 * var(--foco-largura));
   }
@@ -677,6 +768,16 @@ a {
     grid-template-areas: "texto prato";
     align-items: center;
     gap: var(--espaco-6);
+  }
+
+  .detalhe__grade {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--espaco-6);
+  }
+
+  .detalhe__imagem {
+    height: min(var(--altura-prato-detalhe), 70vh);
   }
 
   /* Passa da borda inferior do hero, por cima da linha marrom */

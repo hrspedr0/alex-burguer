@@ -3,15 +3,10 @@
 
 import dados from "./dados.js";
 import { statusDaLoja, horaNaLoja, paraMinutos, formatarHora, DIAS, NOMES_DIAS } from "./horario.js";
+import { criar, montarFileira, preencherCampos } from "./interface.js";
+import { formatarPreco, linkWhatsApp, listarPratos } from "./pratos.js";
 
 const ORDEM_DA_SEMANA = ["segunda", "terca", "quarta", "quinta", "sexta", "sabado", "domingo"];
-const CLASSE_PULO = "esta-pulando";
-const TAMANHO_PRATO = "(min-width: 60em) 13rem, (min-width: 48em) 30vw, 45vw";
-const formatoPreco = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
-
-function linkWhatsApp(numero, mensagem) {
-  return `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-}
 
 function linkMapa(endereco, cidade) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${endereco}, ${cidade}`)}`;
@@ -26,19 +21,6 @@ function comMaiuscula(texto) {
   return texto.charAt(0).toUpperCase() + texto.slice(1);
 }
 
-function criar(tag, classe, texto) {
-  const elemento = document.createElement(tag);
-  if (classe) elemento.className = classe;
-  if (texto !== undefined) elemento.textContent = texto;
-  return elemento;
-}
-
-function preencherCampos() {
-  document.querySelectorAll("[data-campo]").forEach((elemento) => {
-    elemento.textContent = dados[elemento.dataset.campo];
-  });
-}
-
 function preencherLinks() {
   const whatsapp = linkWhatsApp(dados.whatsapp, dados.mensagemPedido);
   const mapa = linkMapa(dados.endereco, dados.cidade);
@@ -51,7 +33,7 @@ function criarItemDoCardapio(item) {
   const linha = criar("p", "comanda__linha");
   const pontos = criar("span", "comanda__pontos");
   pontos.setAttribute("aria-hidden", "true");
-  linha.append(criar("span", "comanda__nome", item.nome), pontos, criar("span", "comanda__preco", formatoPreco.format(item.preco)));
+  linha.append(criar("span", "comanda__nome", item.nome), pontos, criar("span", "comanda__preco", formatarPreco(item.preco)));
   li.append(linha, criar("p", "comanda__descricao", item.descricao));
   return li;
 }
@@ -68,56 +50,6 @@ function montarCardapio(container) {
     bloco.append(titulo, lista);
     container.append(bloco);
   });
-}
-
-function criarImagemDoPrato({ imagem, menor, largura, altura, alt }) {
-  const caminho = `assets/img/${imagem}`;
-  const elemento = criar("img", "destaque__imagem");
-  elemento.loading = "lazy";
-  elemento.decoding = "async";
-  elemento.width = largura;
-  elemento.height = altura;
-  elemento.sizes = TAMANHO_PRATO;
-  elemento.srcset = `${caminho}-480.webp ${menor}w, ${caminho}.webp ${largura}w`;
-  elemento.src = `${caminho}.webp`;
-  elemento.alt = alt;
-  return elemento;
-}
-
-function criarDestaque({ nome, destaque }, indice) {
-  const li = criar("li", "destaque");
-  const idFrase = `frase-prato-${indice}`;
-  const botao = criar("button", "destaque__botao");
-  botao.type = "button";
-  botao.setAttribute("aria-label", nome);
-  botao.setAttribute("aria-describedby", idFrase);
-  botao.append(criarImagemDoPrato(destaque));
-  const frase = criar("p", "destaque__frase", destaque.frase);
-  frase.id = idFrase;
-  li.append(botao, criar("h3", "destaque__nome", nome), frase);
-  return li;
-}
-
-function animarPulo(botao) {
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  botao.classList.remove(CLASSE_PULO);
-  void botao.offsetWidth; // reinicia a animação em cliques seguidos
-  botao.classList.add(CLASSE_PULO);
-}
-
-function encerrarPulo(evento) {
-  evento.target.closest(".destaque__botao")?.classList.remove(CLASSE_PULO);
-}
-
-function montarDestaques(container) {
-  const itens = dados.cardapio.flatMap(({ itens }) => itens).filter((item) => item.destaque);
-  container.append(...itens.map(criarDestaque));
-  container.addEventListener("click", (evento) => {
-    const botao = evento.target.closest(".destaque__botao");
-    if (botao) animarPulo(botao);
-  });
-  container.addEventListener("animationend", encerrarPulo);
-  container.addEventListener("animationcancel", encerrarPulo);
 }
 
 function montarHorarios(container, agora) {
@@ -154,8 +86,8 @@ function manterHorarioAtualizado(selo, horarios) {
   });
 }
 
-preencherCampos();
+preencherCampos(dados);
 preencherLinks();
-montarDestaques(document.querySelector("[data-destaques]"));
+montarFileira(document.querySelector("[data-destaques]"), listarPratos(dados.cardapio));
 montarCardapio(document.querySelector("[data-cardapio]"));
 manterHorarioAtualizado(document.querySelector("[data-selo]"), document.querySelector("[data-horarios]"));

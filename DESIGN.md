@@ -20,7 +20,7 @@ Os valores vivem em `css/tokens.css`. Este arquivo explica o porquê.
 
 | Texto / elemento | Fundo | Contraste | Resultado | Uso |
 |---|---|---|---|---|
-| marrom `#2B1810` | laranja `#F26A1B` | 5,52:1 | passa AA | texto corrido, títulos, **descrições do cardápio** (`--texto-menor`), **frase da fileira de pratos** (`--texto-frase-prato`, peso 500), pontilhado, foco |
+| marrom `#2B1810` | laranja `#F26A1B` | 5,52:1 | passa AA | texto corrido, títulos, **descrições do cardápio** (`--texto-menor`), **frase da fileira de pratos** (`--texto-frase-prato`, peso 500), **descrição, ingredientes e link de voltar da página do prato**, pontilhado, foco |
 | creme `#FFF1DC` | marrom `#2B1810` | 15,21:1 | passa AAA | texto em faixas marrons, botão sobre laranja, dia de hoje nos horários |
 | mostarda `#FFC83D` | marrom `#2B1810` | 10,94:1 | passa AAA | preço/realce em áreas marrons, foco sobre marrom |
 | marrom `#2B1810` | mostarda `#FFC83D` | 10,94:1 | passa AAA | texto do botão mostarda, selo, etiqueta de preço, quadro de horários |
@@ -84,10 +84,13 @@ As áreas alternam: hero laranja, linha marrom, cardápio laranja, "Como pedir" 
 ### Imagens dos pratos
 Cinco imagens geradas por IA, recortadas com fundo transparente e listadas em `CREDITOS.md`. O hambúrguer clássico abre o hero e passa da linha marrom. No cardápio, os cinco formam uma fileira de mesma altura, apoiados na mesma linha, só com imagem, nome e frase; o preço fica na lista por categorias logo abaixo. A sombra suave existe só nesses recortes, para assentá-los no laranja. "Como pedir" e "Onde estamos" ficam sem imagem de prato.
 
-Medição por screenshot, contando só as áreas nas 3 cores da paleta: 320 px = 64% laranja, 28% marrom, 8% mostarda; 375 px = 65/26/9; 1280 px = 69/25/6. A mostarda fica abaixo de 10%; no desktop, o laranja fica acima do alvo.
+Medição por screenshot, contando só as áreas nas 3 cores da paleta. Página inicial: 320 px = 64% laranja, 28% marrom, 8% mostarda; 375 px = 65/26/9; 1280 px = 69/25/6. Página do prato (Alex Clássico): 375 px = 68/32/1; 1280 px = 75/25/0. Nela a mostarda aparece só no preço, nos traços e nas estrelas, então a proporção fica abaixo do alvo.
 
 ### Fileira de pratos
-Nome em `--texto-prato`, traço mostarda de 2,5rem por 4px com contorno marrom (a mostarda sobre o laranja tem só 1,98:1, então o traço é decorativo e precisa do contorno) e frase em marrom, peso 500. Cada prato é um botão: ao ativar, dá um pulo de 8% e 4° em até 450 ms; no hover, sobe 6px com sombra maior. Tudo usa `translate`, `scale` e `rotate`, que não mexem no layout.
+Nome em `--texto-prato`, traço mostarda de 2,5rem por 4px com contorno marrom (a mostarda sobre o laranja tem só 1,98:1, então o traço é decorativo e precisa do contorno) e frase em marrom, peso 500. O nome é um link para `prato.html?item=id`, e a área de clique cobre o item inteiro. No hover, a imagem sobe 6px com sombra maior; ao pressionar, cresce 8% e inclina 4°, só com CSS, sem atrasar a navegação. Tudo usa `translate`, `scale` e `rotate`, que não mexem no layout, e fica desligado com `prefers-reduced-motion`.
+
+### Página do prato (`prato.html`)
+Modelo único preenchido por `js/prato.js`: voltar, imagem recortada, nome com traço, descrição, preço, ingredientes, pedido e "Veja também". Os ingredientes são trechos da descrição, separados por estrelas mostarda com contorno marrom, decorativas. Há um só botão de pedido, com a mensagem do prato: no desktop fica no texto; no celular fixa no rodapé da tela, mantendo a mesma posição na ordem do teclado.
 
 ### Componentes (`css/componentes.css`)
 - **Botão primário**: sobre laranja, marrom + creme (hover: mostarda + marrom); sobre marrom, mostarda + marrom (hover: só contorno mostarda). **Secundário**: contorno marrom (hover: preenchido). **Desativado**: tracejado, sem preenchimento.
@@ -101,5 +104,5 @@ Nome em `--texto-prato`, traço mostarda de 2,5rem por 4px com contorno marrom (
 - Imagem como fundo do hero: texto sobre imagem derruba o contraste.
 - Gradientes, sombras em blocos e cards: a fileira de pratos não tem caixa, e o cardápio completo é lista de comanda.
 - Texto branco ou creme sobre laranja; mostarda sobre laranja sem borda.
-- Animação de entrada por seção: só o selo anima sozinho; os pratos reagem ao clique, ao toque e ao mouse.
+- Animação de entrada por seção: só o selo anima sozinho; os pratos reagem ao mouse e à pressão.
 - Rótulos em caixa-alta antes dos títulos e numeração decorativa.
