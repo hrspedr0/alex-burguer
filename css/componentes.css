@@ -270,7 +270,7 @@ a {
   filter: var(--sombra-prato-hero);
 }
 
-/* ---------- Selo de aberto/fechado: o único movimento da página ---------- */
+/* ---------- Selo de aberto/fechado: anima uma vez ao carregar ---------- */
 .selo {
   flex: none;
   display: grid;
@@ -340,12 +340,42 @@ a {
 }
 
 .destaque {
+  position: relative;
   flex: 0 0 calc((100% - (var(--colunas) - 1) * var(--vao)) / var(--colunas));
   display: grid;
   align-content: start;
   justify-items: center;
-  gap: var(--espaco-2);
+  gap: var(--espaco-3);
   text-align: center;
+}
+
+/* O botão envolve a imagem; a camada ::after estende o clique ao item inteiro */
+.destaque__botao {
+  display: block;
+  width: 100%;
+  min-height: var(--toque-min);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.destaque__botao::after {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--espaco-1));
+  border-radius: var(--raio);
+}
+
+.destaque__botao:focus-visible {
+  outline: none;
+}
+
+.destaque__botao:focus-visible::after {
+  outline: var(--foco-largura) solid var(--cor-foco);
+  outline-offset: var(--foco-afastamento);
 }
 
 .destaque__imagem {
@@ -357,11 +387,56 @@ a {
 }
 
 .destaque__nome {
-  font-size: var(--texto-1);
+  color: var(--cor-texto);
+  font-size: var(--texto-prato);
+}
+
+/* Assinatura: o contorno marrom separa a mostarda do laranja */
+.destaque__nome::after {
+  content: "";
+  display: block;
+  width: var(--largura-traco-prato);
+  height: var(--altura-traco-prato);
+  margin: var(--espaco-2) auto 0;
+  background: var(--cor-acento);
+  box-shadow: 0 0 0 var(--borda-fina) var(--cor-superficie);
 }
 
 .destaque__frase {
-  font-size: var(--texto-menor);
+  color: var(--cor-texto);
+  font-size: var(--texto-frase-prato);
+  font-weight: var(--peso-medio);
+}
+
+/* Só transform individual: o movimento não altera o layout nem os vizinhos */
+@media (prefers-reduced-motion: no-preference) {
+  .destaque__botao.esta-pulando .destaque__imagem {
+    animation: pulo-prato var(--duracao-pulo) var(--curva-pulo);
+  }
+
+  .destaque:has(.esta-pulando) {
+    z-index: 1;
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .destaque__imagem {
+    transition:
+      translate var(--duracao-hover-prato) ease-out,
+      filter var(--duracao-hover-prato) ease-out;
+  }
+
+  .destaque__botao:hover .destaque__imagem {
+    translate: 0 calc(-1 * var(--subida-prato));
+    filter: var(--sombra-prato-destaque);
+  }
+}
+
+@keyframes pulo-prato {
+  45% {
+    scale: var(--escala-pulo);
+    rotate: var(--giro-pulo);
+  }
 }
 
 /* ---------- Cardápio estilo comanda ---------- */
@@ -548,6 +623,11 @@ a {
 }
 
 @media (max-width: 47.99em) {
+  /* Ao navegar com Tab, o item em foco não fica atrás do botão fixo */
+  html {
+    scroll-padding-bottom: calc(var(--toque-min) + var(--espaco-5));
+  }
+
   .botao-fixo {
     position: fixed;
     z-index: 10;

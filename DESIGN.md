@@ -20,7 +20,7 @@ Os valores vivem em `css/tokens.css`. Este arquivo explica o porquê.
 
 | Texto / elemento | Fundo | Contraste | Resultado | Uso |
 |---|---|---|---|---|
-| marrom `#2B1810` | laranja `#F26A1B` | 5,52:1 | passa AA | texto corrido, títulos, **descrições do cardápio** (`--texto-menor`), pontilhado, foco |
+| marrom `#2B1810` | laranja `#F26A1B` | 5,52:1 | passa AA | texto corrido, títulos, **descrições do cardápio** (`--texto-menor`), **frase da fileira de pratos** (`--texto-frase-prato`, peso 500), pontilhado, foco |
 | creme `#FFF1DC` | marrom `#2B1810` | 15,21:1 | passa AAA | texto em faixas marrons, botão sobre laranja, dia de hoje nos horários |
 | mostarda `#FFC83D` | marrom `#2B1810` | 10,94:1 | passa AAA | preço/realce em áreas marrons, foco sobre marrom |
 | marrom `#2B1810` | mostarda `#FFC83D` | 10,94:1 | passa AAA | texto do botão mostarda, selo, etiqueta de preço, quadro de horários |
@@ -47,7 +47,7 @@ Consequência: **sobre o laranja só existe uma cor de texto, o marrom**. A hier
 
 ## A coisa memorável
 
-O **selo "aberto agora / abre às 18h"**: adesivo redondo (mostarda aberto, kraft fechado) ao lado do botão de pedir, que muda conforme o horário de Brasília (`js/horario.js`). Responde à pergunta de quem pede delivery à noite antes de ela ser feita. É o único elemento com movimento ("carimbo": gira e assenta uma vez ao carregar; desligado com `prefers-reduced-motion`).
+O **selo "aberto agora / abre às 18h"**: adesivo redondo (mostarda aberto, kraft fechado) ao lado do botão de pedir, que muda conforme o horário de Brasília (`js/horario.js`). Responde à pergunta de quem pede delivery à noite antes de ela ser feita. Anima uma vez ao carregar ("carimbo": gira e assenta). É o único movimento automático da página; o outro, nos pratos, só acontece quando a pessoa interage. Os dois ficam desligados com `prefers-reduced-motion`.
 
 Apoio: a logo ilustrada, com as letras de ALEX feitas de ingredientes (ver "Logo: cores de exceção").
 
@@ -84,7 +84,10 @@ As áreas alternam: hero laranja, linha marrom, cardápio laranja, "Como pedir" 
 ### Imagens dos pratos
 Cinco imagens geradas por IA, recortadas com fundo transparente e listadas em `CREDITOS.md`. O hambúrguer clássico abre o hero e passa da linha marrom. No cardápio, os cinco formam uma fileira de mesma altura, apoiados na mesma linha, só com imagem, nome e frase; o preço fica na lista por categorias logo abaixo. A sombra suave existe só nesses recortes, para assentá-los no laranja. "Como pedir" e "Onde estamos" ficam sem imagem de prato.
 
-Medição por screenshot, contando só as áreas nas 3 cores da paleta: 320 px = 63% laranja, 28% marrom, 8% mostarda; 375 px = 64/27/9; 1280 px = 69/25/6. No desktop, o laranja fica acima do alvo e a mostarda abaixo.
+Medição por screenshot, contando só as áreas nas 3 cores da paleta: 320 px = 64% laranja, 28% marrom, 8% mostarda; 375 px = 65/26/9; 1280 px = 69/25/6. A mostarda fica abaixo de 10%; no desktop, o laranja fica acima do alvo.
+
+### Fileira de pratos
+Nome em `--texto-prato`, traço mostarda de 2,5rem por 4px com contorno marrom (a mostarda sobre o laranja tem só 1,98:1, então o traço é decorativo e precisa do contorno) e frase em marrom, peso 500. Cada prato é um botão: ao ativar, dá um pulo de 8% e 4° em até 450 ms; no hover, sobe 6px com sombra maior. Tudo usa `translate`, `scale` e `rotate`, que não mexem no layout.
 
 ### Componentes (`css/componentes.css`)
 - **Botão primário**: sobre laranja, marrom + creme (hover: mostarda + marrom); sobre marrom, mostarda + marrom (hover: só contorno mostarda). **Secundário**: contorno marrom (hover: preenchido). **Desativado**: tracejado, sem preenchimento.
@@ -98,5 +101,5 @@ Medição por screenshot, contando só as áreas nas 3 cores da paleta: 320 px =
 - Imagem como fundo do hero: texto sobre imagem derruba o contraste.
 - Gradientes, sombras em blocos e cards: a fileira de pratos não tem caixa, e o cardápio completo é lista de comanda.
 - Texto branco ou creme sobre laranja; mostarda sobre laranja sem borda.
-- Animação de entrada por seção: o único movimento é o selo.
+- Animação de entrada por seção: só o selo anima sozinho; os pratos reagem ao clique, ao toque e ao mouse.
 - Rótulos em caixa-alta antes dos títulos e numeração decorativa.

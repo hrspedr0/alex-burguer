@@ -5,6 +5,7 @@ import dados from "./dados.js";
 import { statusDaLoja, horaNaLoja, paraMinutos, formatarHora, DIAS, NOMES_DIAS } from "./horario.js";
 
 const ORDEM_DA_SEMANA = ["segunda", "terca", "quarta", "quinta", "sexta", "sabado", "domingo"];
+const CLASSE_PULO = "esta-pulando";
 const TAMANHO_PRATO = "(min-width: 60em) 13rem, (min-width: 48em) 30vw, 45vw";
 const formatoPreco = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
@@ -83,15 +84,40 @@ function criarImagemDoPrato({ imagem, menor, largura, altura, alt }) {
   return elemento;
 }
 
-function criarDestaque({ nome, destaque }) {
+function criarDestaque({ nome, destaque }, indice) {
   const li = criar("li", "destaque");
-  li.append(criarImagemDoPrato(destaque), criar("h3", "destaque__nome", nome), criar("p", "destaque__frase", destaque.frase));
+  const idFrase = `frase-prato-${indice}`;
+  const botao = criar("button", "destaque__botao");
+  botao.type = "button";
+  botao.setAttribute("aria-label", nome);
+  botao.setAttribute("aria-describedby", idFrase);
+  botao.append(criarImagemDoPrato(destaque));
+  const frase = criar("p", "destaque__frase", destaque.frase);
+  frase.id = idFrase;
+  li.append(botao, criar("h3", "destaque__nome", nome), frase);
   return li;
+}
+
+function animarPulo(botao) {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  botao.classList.remove(CLASSE_PULO);
+  void botao.offsetWidth; // reinicia a animação em cliques seguidos
+  botao.classList.add(CLASSE_PULO);
+}
+
+function encerrarPulo(evento) {
+  evento.target.closest(".destaque__botao")?.classList.remove(CLASSE_PULO);
 }
 
 function montarDestaques(container) {
   const itens = dados.cardapio.flatMap(({ itens }) => itens).filter((item) => item.destaque);
   container.append(...itens.map(criarDestaque));
+  container.addEventListener("click", (evento) => {
+    const botao = evento.target.closest(".destaque__botao");
+    if (botao) animarPulo(botao);
+  });
+  container.addEventListener("animationend", encerrarPulo);
+  container.addEventListener("animationcancel", encerrarPulo);
 }
 
 function montarHorarios(container, agora) {
