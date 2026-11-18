@@ -21,14 +21,9 @@ const dados = {
   },
 
   // Cardápio por categoria, na ordem em que aparece na página. // FICTÍCIO
-  // "fotos" é opcional: imagens ilustrativas de banco de imagens (ver CREDITOS.md), em assets/img.
-  // "menor" é a largura da versão para celular (arquivo-800.webp, por exemplo).
   cardapio: [
     {
       categoria: "Lanches",
-      fotos: [
-        { arquivo: "hamburguer-duplo", menor: 800, largura: 1600, altura: 1329, alt: "Hambúrguer com duas carnes, molho rosado, queijo, cebola, picles, tomate e alface sobre uma tábua de madeira." },
-      ],
       itens: [
         { nome: "Alex Clássico", descricao: "Pão brioche, carne de 120 g na chapa, queijo, alface, tomate e molho da casa.", preco: 24.9 }, // FICTÍCIO
         { nome: "Alex Bacon", descricao: "Carne de 120 g, cheddar, bacon crocante e cebola caramelizada.", preco: 29.9 }, // FICTÍCIO
@@ -57,10 +52,6 @@ const dados = {
     },
     {
       categoria: "Sobremesa",
-      fotos: [
-        { arquivo: "milk-shake-chocolate", menor: 480, largura: 900, altura: 1350, alt: "Taça alta com bebida cremosa, chantili e calda de chocolate sobre uma mesa de madeira." },
-        { arquivo: "brownie-com-sorvete", menor: 800, largura: 1600, altura: 1067, alt: "Pedaço de brownie em um prato branco, ao lado de sorvete coberto com calda de chocolate e uma folha de hortelã." },
-      ],
       itens: [
         { nome: "Brownie com sorvete", descricao: "Brownie quente com uma bola de sorvete de creme.", preco: 16.9 }, // FICTÍCIO
         { nome: "Milk-shake", descricao: "400 ml, chocolate, morango ou baunilha.", preco: 17.9 }, // FICTÍCIO

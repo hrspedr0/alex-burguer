@@ -73,18 +73,13 @@ Versões: `logo.svg` para fundo laranja ou creme; `logo-simbolo.svg` (só a ilus
 |---|---|---|---|
 | Cabeçalho | marrom | faixa inteira; ilustração sem o nome (`logo-simbolo.svg`); nome em texto só no desktop | hover do menu |
 | Hero | laranja | botão "Pedir no WhatsApp" (marrom + creme) | selo aberto (fechado = kraft) |
-| Cardápio | laranja | etiquetas das categorias; faixa de foto com bordas marrons separando do hero | etiqueta de preço com borda marrom |
-| Como pedir | **marrom** | seção inteira (creme), com foto de fundo escuro em um dos lados | marcador numerado de cada passo |
+| Cardápio | laranja | etiquetas das categorias; linha marrom separando do hero | etiqueta de preço com borda marrom |
+| Como pedir | **marrom** | seção inteira (creme) | marcador numerado de cada passo |
 | Onde estamos | laranja | dia de hoje (marrom + creme) e borda do quadro | quadro de horários (mostarda + marrom) |
 | Rodapé | marrom | `logo-negativo.svg`, nome, aviso em kraft | botão "Pedir no WhatsApp" |
 | Botão fixo (celular) | - | marrom + creme | borda mostarda |
 
-As áreas alternam: hero laranja, faixa de foto escura com bordas marrons, cardápio laranja, "Como pedir" marrom, "Onde estamos" laranja, rodapé marrom. O cardápio fica no laranja porque é a seção mais longa.
-
-### Fotos
-Fotos de banco de imagens, listadas em `CREDITOS.md`, sempre em WebP com `width`, `height` e `loading="lazy"`. Têm formatos diferentes de propósito: faixa de largura total, foto única, dupla desigual e metade de seção. O hero fica sem foto para não competir com a logo. As cores das fotos ficam fora da conta do 60/30/10. O cardápio traz o aviso "Fotos ilustrativas".
-
-Medição por screenshot, contando só as áreas nas 3 cores da paleta: 320 px = 58% laranja, 33% marrom, 9% mostarda; 375 px = 58/32/9; 1280 px = 65/29/6. A proporção é aproximada, e a mostarda fica abaixo de 10% no desktop.
+As áreas alternam: hero laranja, linha marrom, cardápio laranja, "Como pedir" marrom, "Onde estamos" laranja, rodapé marrom. O cardápio fica no laranja porque é a seção mais longa.
 
 ### Componentes (`css/componentes.css`)
 - **Botão primário**: sobre laranja, marrom + creme (hover: mostarda + marrom); sobre marrom, mostarda + marrom (hover: só contorno mostarda). **Secundário**: contorno marrom (hover: preenchido). **Desativado**: tracejado, sem preenchimento.
