@@ -58,7 +58,7 @@
   --borda: 2px;             /* bordas e linha pontilhada do cardápio */
   --foco-largura: 3px;
   --foco-afastamento: 2px;
-  --borda-chapa: 0.5rem;    /* faixa marrom entre duas seções laranja */
+  --borda-chapa: 0.5rem;    /* bordas da faixa de foto entre hero e cardápio */
   --tamanho-oculto: 1px;    /* texto só para leitores de tela */
   --toque-min: 2.75rem;     /* 44 px */
   --largura-max: 72rem;
@@ -67,6 +67,8 @@
   --altura-simbolo: 2.75rem;      /* ilustração no cabeçalho */
   --largura-logo-hero: 26rem;
   --largura-logo-rodape: 12rem;
+  --altura-faixa-foto: clamp(13rem, 7rem + 30vw, 32rem);
+  --proporcao-foto-larga: 16 / 9;
   --tamanho-selo: clamp(6.5rem, 5.5rem + 4vw, 7.5rem);
 
   /* ---------- Movimento (só o selo, uma vez) ---------- */

@@ -91,11 +91,6 @@ a {
   --cor-foco: var(--cor-foco-sobre-superficie);
 }
 
-/* Duas seções laranja seguidas: separadas pela borda da chapa */
-.secao--laranja + .secao--laranja {
-  border-top: var(--borda-chapa) solid var(--cor-superficie);
-}
-
 .secao__interno {
   max-width: var(--largura-max);
   margin-inline: auto;
@@ -317,7 +312,46 @@ a {
   }
 }
 
+/* ---------- Fotos ---------- */
+.foto {
+  width: 100%;
+  border: var(--borda) solid var(--cor-superficie);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+}
+
+/* Faixa entre hero e cardápio: separa as duas áreas laranja */
+.faixa-foto {
+  margin: 0;
+  border-block: var(--borda-chapa) solid var(--cor-superficie);
+  background: var(--cor-superficie);
+}
+
+.faixa-foto__imagem {
+  width: 100%;
+  height: var(--altura-faixa-foto);
+  object-fit: cover;
+}
+
 /* ---------- Cardápio estilo comanda ---------- */
+.cardapio__nota {
+  margin-top: calc(-1 * var(--espaco-4));
+  margin-bottom: var(--espaco-5);
+  font-size: var(--texto-menor);
+}
+
+.comanda__fotos {
+  margin-top: var(--espaco-5);
+}
+
+/* Dupla em tamanhos diferentes, alinhada pela base: não é uma grade de cards */
+.comanda__fotos--dupla {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  align-items: end;
+  gap: var(--espaco-3);
+}
+
 .cardapio {
   display: grid;
   gap: var(--espaco-6);
@@ -381,6 +415,20 @@ a {
 }
 
 /* ---------- Como pedir (seção marrom) ---------- */
+.secao.como-pedir {
+  padding-block: 0;
+}
+
+.como-pedir__foto {
+  width: 100%;
+  aspect-ratio: var(--proporcao-foto-larga);
+  object-fit: cover;
+}
+
+.como-pedir__texto {
+  padding: var(--espaco-6) var(--espaco-3);
+}
+
 .passos {
   display: grid;
   gap: var(--espaco-4);
@@ -426,11 +474,17 @@ a {
   font-weight: var(--peso-forte);
 }
 
+.onde__foto {
+  margin-top: var(--espaco-5);
+}
+
+/* Placa mostarda com borda marrom: a borda separa a mostarda do laranja */
 .quadro-horarios {
   padding: var(--espaco-4);
+  border: var(--borda) solid var(--cor-superficie);
   border-radius: var(--raio);
-  background: var(--cor-superficie);
-  color: var(--cor-texto-inverso);
+  background: var(--cor-acento);
+  color: var(--cor-texto);
 }
 
 .quadro-horarios__titulo {
@@ -454,17 +508,12 @@ a {
 
 .horarios dd {
   margin: 0;
-  color: var(--cor-apoio);
 }
 
 .horarios__dia--hoje {
-  background: var(--cor-acento);
-  color: var(--cor-texto);
+  background: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
   font-weight: var(--peso-forte);
-}
-
-.horarios__dia--hoje dd {
-  color: var(--cor-texto);
 }
 
 /* ---------- Rodapé ---------- */
@@ -577,8 +626,20 @@ a {
     grid-row: span 3;
   }
 
-  .passos {
+  /* Foto ocupa metade da seção, até a borda da tela */
+  .como-pedir {
+    display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: var(--espaco-6);
+    align-items: stretch;
+  }
+
+  .como-pedir__foto {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .como-pedir__texto {
+    align-self: center;
+    padding: var(--espaco-7) var(--espaco-5);
   }
 }

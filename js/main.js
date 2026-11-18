@@ -5,6 +5,11 @@ import dados from "./dados.js";
 import { statusDaLoja, horaNaLoja, paraMinutos, formatarHora, DIAS, NOMES_DIAS } from "./horario.js";
 
 const ORDEM_DA_SEMANA = ["segunda", "terca", "quarta", "quinta", "sexta", "sabado", "domingo"];
+const TAMANHOS_FOTO = {
+  unica: "(min-width: 60em) 45vw, calc(100vw - 2rem)",
+  estreita: "(min-width: 60em) 18vw, 40vw",
+  larga: "(min-width: 60em) 27vw, 60vw",
+};
 const formatoPreco = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
 function linkWhatsApp(numero, mensagem) {
@@ -54,8 +59,34 @@ function criarItemDoCardapio(item) {
   return li;
 }
 
+function tamanhoDaFoto(foto, total) {
+  if (total === 1) return TAMANHOS_FOTO.unica;
+  return foto.altura > foto.largura ? TAMANHOS_FOTO.estreita : TAMANHOS_FOTO.larga;
+}
+
+function criarFoto(foto, total) {
+  const caminho = `assets/img/${foto.arquivo}`;
+  const imagem = criar("img", "foto");
+  imagem.loading = "lazy";
+  imagem.decoding = "async";
+  imagem.width = foto.largura;
+  imagem.height = foto.altura;
+  imagem.sizes = tamanhoDaFoto(foto, total);
+  imagem.srcset = `${caminho}-${foto.menor}.webp ${foto.menor}w, ${caminho}.webp ${foto.largura}w`;
+  imagem.src = `${caminho}.webp`;
+  imagem.alt = foto.alt;
+  return imagem;
+}
+
+function criarFotosDaCategoria(fotos) {
+  const classe = fotos.length > 1 ? "comanda__fotos comanda__fotos--dupla" : "comanda__fotos";
+  const bloco = criar("div", classe);
+  bloco.append(...fotos.map((foto) => criarFoto(foto, fotos.length)));
+  return bloco;
+}
+
 function montarCardapio(container) {
-  dados.cardapio.forEach(({ categoria, itens }, indice) => {
+  dados.cardapio.forEach(({ categoria, itens, fotos }, indice) => {
     const id = `categoria-${indice}`;
     const bloco = criar("section", "comanda");
     bloco.setAttribute("aria-labelledby", id);
@@ -64,6 +95,7 @@ function montarCardapio(container) {
     const lista = criar("ul", "comanda__lista");
     lista.append(...itens.map(criarItemDoCardapio));
     bloco.append(titulo, lista);
+    if (fotos?.length) bloco.append(criarFotosDaCategoria(fotos));
     container.append(bloco);
   });
 }
