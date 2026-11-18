@@ -65,9 +65,17 @@
 
   /* ---------- Marca ---------- */
   --altura-simbolo: 2.75rem;      /* ilustração no cabeçalho */
-  --largura-logo-hero: 26rem;
   --largura-logo-rodape: 12rem;
   --tamanho-selo: clamp(6.5rem, 5.5rem + 4vw, 7.5rem);
+
+  /* ---------- Pratos recortados (só eles têm sombra) ---------- */
+  --largura-prato-hero: 32.5rem;          /* 520 px no desktop */
+  --largura-prato-hero-celular: 15rem;    /* 240 px */
+  --avanco-prato-hero: 3rem;              /* quanto passa da borda do hero */
+  --altura-prato: 8.75rem;                /* 140 px na fileira do celular */
+  --altura-prato-desktop: 13.75rem;       /* 220 px na fileira do desktop */
+  --sombra-prato: drop-shadow(0 0.5rem 0.625rem rgb(43 24 16 / 0.35));
+  --sombra-prato-hero: drop-shadow(0 1rem 1.25rem rgb(43 24 16 / 0.4));
 
   /* ---------- Movimento (só o selo, uma vez) ---------- */
   --giro-selo: -8deg;

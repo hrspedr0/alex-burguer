@@ -5,6 +5,7 @@ import dados from "./dados.js";
 import { statusDaLoja, horaNaLoja, paraMinutos, formatarHora, DIAS, NOMES_DIAS } from "./horario.js";
 
 const ORDEM_DA_SEMANA = ["segunda", "terca", "quarta", "quinta", "sexta", "sabado", "domingo"];
+const TAMANHO_PRATO = "(min-width: 60em) 13rem, (min-width: 48em) 30vw, 45vw";
 const formatoPreco = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
 function linkWhatsApp(numero, mensagem) {
@@ -68,6 +69,31 @@ function montarCardapio(container) {
   });
 }
 
+function criarImagemDoPrato({ imagem, menor, largura, altura, alt }) {
+  const caminho = `assets/img/${imagem}`;
+  const elemento = criar("img", "destaque__imagem");
+  elemento.loading = "lazy";
+  elemento.decoding = "async";
+  elemento.width = largura;
+  elemento.height = altura;
+  elemento.sizes = TAMANHO_PRATO;
+  elemento.srcset = `${caminho}-480.webp ${menor}w, ${caminho}.webp ${largura}w`;
+  elemento.src = `${caminho}.webp`;
+  elemento.alt = alt;
+  return elemento;
+}
+
+function criarDestaque({ nome, destaque }) {
+  const li = criar("li", "destaque");
+  li.append(criarImagemDoPrato(destaque), criar("h3", "destaque__nome", nome), criar("p", "destaque__frase", destaque.frase));
+  return li;
+}
+
+function montarDestaques(container) {
+  const itens = dados.cardapio.flatMap(({ itens }) => itens).filter((item) => item.destaque);
+  container.append(...itens.map(criarDestaque));
+}
+
 function montarHorarios(container, agora) {
   const hoje = DIAS[horaNaLoja(agora).dia];
   const linhas = ORDEM_DA_SEMANA.map((chave) => {
@@ -104,5 +130,6 @@ function manterHorarioAtualizado(selo, horarios) {
 
 preencherCampos();
 preencherLinks();
+montarDestaques(document.querySelector("[data-destaques]"));
 montarCardapio(document.querySelector("[data-cardapio]"));
 manterHorarioAtualizado(document.querySelector("[data-selo]"), document.querySelector("[data-horarios]"));

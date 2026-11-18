@@ -43,7 +43,7 @@ Consequência: **sobre o laranja só existe uma cor de texto, o marrom**. A hier
 
 - **`--raio: 0.25rem` (4 px)**: canto de papelão cortado e de etiqueta de preço. Um raio de 0 fica frio demais, e 12 a 16 px lembra aplicativo de banco. 4 px tira a aresta sem amaciar a marca de rua.
 - Exceção única: `--raio-selo: 50%`, porque o selo de aberto/fechado é um adesivo redondo.
-- Bordas de 2 px em marrom, sem sombras suaves: separação por cor e traço, como embalagem impressa.
+- Bordas de 2 px em marrom, sem sombras suaves na interface: separação por cor e traço, como embalagem impressa. A única sombra é a dos pratos recortados.
 
 ## A coisa memorável
 
@@ -65,15 +65,15 @@ A logo (`assets/logo.svg`, `logo-negativo.svg`, `favicon.svg`) é uma ilustraç�
 | `#7FA83A` | alface (verde oliva, puxado para o quente) |
 | `#D93A2A` / `#F07A5C` | tomate e miolo do tomate |
 
-Versões: `logo.svg` para fundo laranja ou creme; `logo-simbolo.svg` (só a ilustração, contorno creme) para o cabeçalho marrom; `logo-negativo.svg` para fundo marrom (nome em creme e um contorno creme em volta do hambúrguer, como adesivo); `favicon.svg` só com o hambúrguer em camadas, sem letras.
+Versões: `logo.svg` para fundo laranja ou creme (guardada, sem uso na página atual); `logo-simbolo.svg` (só a ilustração, contorno creme) para o cabeçalho marrom; `logo-negativo.svg` para fundo marrom (nome em creme e um contorno creme em volta do hambúrguer, como adesivo); `favicon.svg` só com o hambúrguer em camadas, sem letras.
 
 ## Regra 60/30/10 por seção
 
 | Seção | Fundo | 30% marrom | 10% mostarda |
 |---|---|---|---|
 | Cabeçalho | marrom | faixa inteira; ilustração sem o nome (`logo-simbolo.svg`); nome em texto só no desktop | hover do menu |
-| Hero | laranja | botão "Pedir no WhatsApp" (marrom + creme) | selo aberto (fechado = kraft) |
-| Cardápio | laranja | etiquetas das categorias; linha marrom separando do hero | etiqueta de preço com borda marrom |
+| Hero | laranja | botão "Pedir no WhatsApp" (marrom + creme), linha marrom na base | selo aberto (fechado = kraft) |
+| Cardápio | laranja | etiquetas das categorias | etiqueta de preço com borda marrom |
 | Como pedir | **marrom** | seção inteira (creme) | marcador numerado de cada passo |
 | Onde estamos | laranja | dia de hoje (marrom + creme) e borda do quadro | quadro de horários (mostarda + marrom) |
 | Rodapé | marrom | `logo-negativo.svg`, nome, aviso em kraft | botão "Pedir no WhatsApp" |
@@ -81,17 +81,22 @@ Versões: `logo.svg` para fundo laranja ou creme; `logo-simbolo.svg` (só a ilus
 
 As áreas alternam: hero laranja, linha marrom, cardápio laranja, "Como pedir" marrom, "Onde estamos" laranja, rodapé marrom. O cardápio fica no laranja porque é a seção mais longa.
 
+### Imagens dos pratos
+Cinco imagens geradas por IA, recortadas com fundo transparente e listadas em `CREDITOS.md`. O hambúrguer clássico abre o hero e passa da linha marrom. No cardápio, os cinco formam uma fileira de mesma altura, apoiados na mesma linha, só com imagem, nome e frase; o preço fica na lista por categorias logo abaixo. A sombra suave existe só nesses recortes, para assentá-los no laranja. "Como pedir" e "Onde estamos" ficam sem imagem de prato.
+
+Medição por screenshot, contando só as áreas nas 3 cores da paleta: 320 px = 63% laranja, 28% marrom, 8% mostarda; 375 px = 64/27/9; 1280 px = 69/25/6. No desktop, o laranja fica acima do alvo e a mostarda abaixo.
+
 ### Componentes (`css/componentes.css`)
 - **Botão primário**: sobre laranja, marrom + creme (hover: mostarda + marrom); sobre marrom, mostarda + marrom (hover: só contorno mostarda). **Secundário**: contorno marrom (hover: preenchido). **Desativado**: tracejado, sem preenchimento.
 - **Foco**: anel de 3px; `--cor-foco` é marrom em áreas laranja e mostarda em áreas marrons. No botão fixo o anel fica por dentro, para aparecer sobre qualquer seção.
-- **Selo**: adesivo redondo com borda e tracejado marrom, ao lado do botão do hero (não em cima da logo, para não cobrir o X). Aberto = mostarda; fechado = kraft. Texto vem de `statusDaLoja`.
+- **Selo**: adesivo redondo com borda e tracejado marrom, ao lado do botão do hero. Aberto = mostarda; fechado = kraft. Texto vem de `statusDaLoja`.
 - **Comanda**: nome · linha pontilhada (largura mínima, nunca some) · etiqueta de preço. Duas colunas a partir de 60em.
 
 ## Fora de propósito
 
 - Modo escuro separado: a paleta já é quente e escura nas áreas marrons; o briefing não pede.
-- Fotos como fundo do hero: ainda não há fotos, e texto sobre foto derruba contraste.
-- Sombras, gradientes e cards iguais em grade: o cardápio é lista de comanda.
+- Imagem como fundo do hero: texto sobre imagem derruba o contraste.
+- Gradientes, sombras em blocos e cards: a fileira de pratos não tem caixa, e o cardápio completo é lista de comanda.
 - Texto branco ou creme sobre laranja; mostarda sobre laranja sem borda.
 - Animação de entrada por seção: o único movimento é o selo.
 - Rótulos em caixa-alta antes dos títulos e numeração decorativa.

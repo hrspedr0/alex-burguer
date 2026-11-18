@@ -236,8 +236,8 @@ a {
 .hero__interno {
   display: grid;
   grid-template-areas:
-    "marca"
-    "texto";
+    "texto"
+    "prato";
   gap: var(--espaco-5);
 }
 
@@ -260,10 +260,14 @@ a {
   gap: var(--espaco-3);
 }
 
-.hero__marca {
-  grid-area: marca;
+/* No celular vem depois do título e do botão */
+.hero__prato {
+  grid-area: prato;
+  position: relative;
+  z-index: 1;
   justify-self: center;
-  width: min(var(--largura-logo-hero), 100%);
+  width: min(var(--largura-prato-hero-celular), 100%);
+  filter: var(--sombra-prato-hero);
 }
 
 /* ---------- Selo de aberto/fechado: o único movimento da página ---------- */
@@ -314,6 +318,50 @@ a {
     opacity: 1;
     transform: rotate(var(--giro-selo));
   }
+}
+
+/* ---------- Fileira de pratos: sem borda, sem card, só o recorte ---------- */
+.cardapio__nota {
+  margin-top: calc(-1 * var(--espaco-4));
+  margin-bottom: var(--espaco-5);
+  font-size: var(--texto-menor);
+}
+
+.destaques {
+  --colunas: 2;
+  --vao: var(--espaco-3);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* centraliza o último item quando sobra um */
+  gap: var(--espaco-5) var(--vao);
+  margin: 0 0 var(--espaco-6);
+  padding: 0;
+  list-style: none;
+}
+
+.destaque {
+  flex: 0 0 calc((100% - (var(--colunas) - 1) * var(--vao)) / var(--colunas));
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: var(--espaco-2);
+  text-align: center;
+}
+
+.destaque__imagem {
+  width: 100%;
+  height: var(--altura-prato);
+  object-fit: contain;
+  object-position: center bottom; /* todos apoiados na mesma linha */
+  filter: var(--sombra-prato);
+}
+
+.destaque__nome {
+  font-size: var(--texto-1);
+}
+
+.destaque__frase {
+  font-size: var(--texto-menor);
 }
 
 /* ---------- Cardápio estilo comanda ---------- */
@@ -546,9 +594,21 @@ a {
 
   .hero__interno {
     grid-template-columns: 1.2fr 1fr;
-    grid-template-areas: "texto marca";
+    grid-template-areas: "texto prato";
     align-items: center;
     gap: var(--espaco-6);
+  }
+
+  /* Passa da borda inferior do hero, por cima da linha marrom */
+  .hero__prato {
+    align-self: end;
+    justify-self: end;
+    width: min(var(--largura-prato-hero), 100%);
+    margin-bottom: calc(-1 * (var(--espaco-7) + var(--borda-chapa) + var(--avanco-prato-hero)));
+  }
+
+  .destaques {
+    --colunas: 3;
   }
 
   .onde {
@@ -564,13 +624,25 @@ a {
 }
 
 @media (min-width: 60em) {
+  .destaques {
+    --colunas: 5;
+    --vao: var(--espaco-4);
+  }
+
+  .destaque__imagem {
+    height: var(--altura-prato-desktop);
+  }
+
+  /* Duas colunas equilibradas, mantendo a ordem das categorias */
   .cardapio {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: block;
+    columns: 2;
     column-gap: var(--espaco-7);
   }
 
-  .cardapio > :first-child {
-    grid-row: span 3;
+  .comanda {
+    break-inside: avoid;
+    padding-bottom: var(--espaco-6);
   }
 
   .passos {

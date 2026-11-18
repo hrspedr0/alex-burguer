@@ -5,3 +5,6 @@ assets/referencia/
 
 # Originais pesados das fotos: o site usa só os WebP
 assets/img/*.jpg
+
+# Recortes em alta resolução: o site usa só os WebP
+assets/img/*.png

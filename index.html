@@ -48,15 +48,24 @@
               <p>Para ver o cardápio, os horários e pedir pelo WhatsApp, ative o JavaScript do navegador.</p>
             </noscript>
           </div>
-          <div class="hero__marca">
-            <img class="hero__logo" src="assets/logo.svg" alt="" width="380" height="398" />
-          </div>
+          <img
+            class="hero__prato"
+            src="assets/img/prato-hamburguer-classico.webp"
+            srcset="assets/img/prato-hamburguer-classico-480.webp 480w, assets/img/prato-hamburguer-classico.webp 900w"
+            sizes="(min-width: 48em) 32.5rem, 15rem"
+            width="900"
+            height="807"
+            fetchpriority="high"
+            alt="Hambúrguer com carne grelhada, queijo amarelo derretido, tomate, alface e molho em pão tostado."
+          />
         </div>
       </section>
 
       <section class="secao secao--laranja" id="cardapio" aria-labelledby="cardapio-titulo">
         <div class="secao__interno">
           <h2 class="secao__titulo" id="cardapio-titulo">Cardápio</h2>
+          <p class="cardapio__nota">Imagens geradas por IA, ilustrativas.</p>
+          <ul class="destaques" data-destaques aria-label="Pratos em destaque"></ul>
           <div class="cardapio" data-cardapio></div>
         </div>
       </section>
@@ -97,7 +106,7 @@
         <div class="rodape__texto">
           <p class="rodape__nome"><strong data-campo="nome"></strong> · <span data-campo="cidade"></span></p>
           <a class="botao" data-link="whatsapp" target="_blank" rel="noopener noreferrer">Pedir no WhatsApp</a>
-          <p class="rodape__aviso">Projeto fictício para estudo. Nome, endereço, telefone, horários e preços são inventados.</p>
+          <p class="rodape__aviso">Projeto fictício para estudo. Nome, endereço, telefone, horários e preços são inventados. Imagens geradas por IA, ilustrativas.</p>
         </div>
       </div>
     </footer>
