@@ -8,6 +8,7 @@ const dados = {
   endereco: "Rua Sete de Setembro, 245, Centro", // FICTÍCIO
   whatsapp: "5500000000000", // FICTÍCIO: placeholder inválido de propósito
   mensagemPedido: "Olá, Alex Burguer! Quero fazer um pedido:", // FICTÍCIO
+  chamadas: ["Feito na chapa", "Na hora", "Para comer aqui ou receber em casa"], // FICTÍCIO: frases da faixa, seguidas da cidade
 
   // Horários no fuso America/Sao_Paulo. null = fechado. // FICTÍCIO
   horarios: {

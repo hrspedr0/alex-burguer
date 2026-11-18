@@ -228,11 +228,104 @@ a {
   }
 }
 
-/* ---------- Hero ---------- */
-.hero {
-  border-bottom: var(--borda-chapa) solid var(--cor-superficie);
+/* ---------- Faixa divisória: frases em movimento entre seções ---------- */
+.faixa {
+  --cor-foco: var(--cor-foco-sobre-superficie);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  padding-block: var(--espaco-3);
+  background: var(--cor-superficie);
+  color: var(--cor-texto-inverso);
+  font-family: var(--fonte-titulo);
+  font-size: var(--texto-faixa);
+  font-weight: var(--peso-titulo);
+  letter-spacing: var(--espacamento-faixa);
+  line-height: var(--entrelinha-titulo);
+  text-transform: uppercase;
 }
 
+.faixa:empty {
+  display: none;
+}
+
+.faixa:focus-visible {
+  outline-offset: calc(-1 * var(--foco-largura));
+}
+
+/* Sem animação: uma única lista, que quebra linha e mostra todas as frases */
+.faixa__grupo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--espaco-2) var(--espaco-4);
+  width: 100%;
+  margin: 0;
+  padding: 0 var(--espaco-3);
+  list-style: none;
+}
+
+.faixa__grupo[aria-hidden="true"] {
+  display: none;
+}
+
+.faixa__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-4);
+  text-align: center;
+}
+
+.faixa__estrela {
+  flex: none;
+  width: var(--tamanho-estrela);
+  height: var(--tamanho-estrela);
+  fill: var(--cor-acento);
+}
+
+.faixa__item:last-child .faixa__estrela {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .faixa__trilha {
+    display: flex;
+    width: max-content;
+  }
+
+  .faixa__grupo,
+  .faixa__grupo[aria-hidden="true"] {
+    display: flex;
+    flex: none;
+    flex-wrap: nowrap;
+    gap: 0;
+    width: auto;
+    padding: 0;
+    animation: faixa-corre var(--duracao-faixa) linear infinite;
+  }
+
+  .faixa__item {
+    padding-right: var(--espaco-4);
+    white-space: nowrap;
+  }
+
+  .faixa__item:last-child .faixa__estrela {
+    display: block;
+  }
+
+  .faixa:hover .faixa__grupo,
+  .faixa:focus .faixa__grupo {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes faixa-corre {
+  to {
+    translate: -100% 0;
+  }
+}
+
+/* ---------- Hero ---------- */
 .hero__interno {
   display: grid;
   grid-template-areas:
@@ -263,8 +356,6 @@ a {
 /* No celular vem depois do título e do botão */
 .hero__prato {
   grid-area: prato;
-  position: relative;
-  z-index: 1;
   justify-self: center;
   width: min(var(--largura-prato-hero-celular), 100%);
   filter: var(--sombra-prato-hero);
@@ -444,10 +535,6 @@ a {
 }
 
 /* ---------- Página do prato ---------- */
-.detalhe {
-  border-bottom: var(--borda-chapa) solid var(--cor-superficie);
-}
-
 .detalhe__voltar {
   display: inline-flex;
   align-items: center;
@@ -780,12 +867,12 @@ a {
     height: min(var(--altura-prato-detalhe), 70vh);
   }
 
-  /* Passa da borda inferior do hero, por cima da linha marrom */
+  /* Fica inteiro dentro do hero, com folga antes da faixa */
   .hero__prato {
     align-self: end;
     justify-self: end;
     width: min(var(--largura-prato-hero), 100%);
-    margin-bottom: calc(-1 * (var(--espaco-7) + var(--borda-chapa) + var(--avanco-prato-hero)));
+    margin-bottom: calc(var(--espaco-4) - var(--espaco-7));
   }
 
   .destaques {

@@ -21,8 +21,8 @@ Os valores vivem em `css/tokens.css`. Este arquivo explica o porquê.
 | Texto / elemento | Fundo | Contraste | Resultado | Uso |
 |---|---|---|---|---|
 | marrom `#2B1810` | laranja `#F26A1B` | 5,52:1 | passa AA | texto corrido, títulos, **descrições do cardápio** (`--texto-menor`), **frase da fileira de pratos** (`--texto-frase-prato`, peso 500), **descrição, ingredientes e link de voltar da página do prato**, pontilhado, foco |
-| creme `#FFF1DC` | marrom `#2B1810` | 15,21:1 | passa AAA | texto em faixas marrons, botão sobre laranja, dia de hoje nos horários |
-| mostarda `#FFC83D` | marrom `#2B1810` | 10,94:1 | passa AAA | preço/realce em áreas marrons, foco sobre marrom |
+| creme `#FFF1DC` | marrom `#2B1810` | 15,21:1 | passa AAA | texto em faixas marrons, **faixa divisória** (`--texto-faixa`, caixa-alta), botão sobre laranja, dia de hoje nos horários |
+| mostarda `#FFC83D` | marrom `#2B1810` | 10,94:1 | passa AAA | preço/realce em áreas marrons, estrela da faixa divisória, foco sobre marrom |
 | marrom `#2B1810` | mostarda `#FFC83D` | 10,94:1 | passa AAA | texto do botão mostarda, selo, etiqueta de preço, quadro de horários |
 | kraft `#C9AE8C` | marrom `#2B1810` | 7,99:1 | passa AAA | **aviso do rodapé** (`--texto-menor`) |
 | laranja `#F26A1B` | marrom `#2B1810` | 5,52:1 | passa AA | destaque de texto dentro de área marrom |
@@ -72,19 +72,22 @@ Versões: `logo.svg` para fundo laranja ou creme (guardada, sem uso na página a
 | Seção | Fundo | 30% marrom | 10% mostarda |
 |---|---|---|---|
 | Cabeçalho | marrom | faixa inteira; ilustração sem o nome (`logo-simbolo.svg`); nome em texto só no desktop | hover do menu |
-| Hero | laranja | botão "Pedir no WhatsApp" (marrom + creme), linha marrom na base | selo aberto (fechado = kraft) |
+| Hero | laranja | botão "Pedir no WhatsApp" (marrom + creme), faixa divisória logo abaixo | selo aberto (fechado = kraft) |
 | Cardápio | laranja | etiquetas das categorias | etiqueta de preço com borda marrom |
 | Como pedir | **marrom** | seção inteira (creme) | marcador numerado de cada passo |
 | Onde estamos | laranja | dia de hoje (marrom + creme) e borda do quadro | quadro de horários (mostarda + marrom) |
 | Rodapé | marrom | `logo-negativo.svg`, nome, aviso em kraft | botão "Pedir no WhatsApp" |
 | Botão fixo (celular) | - | marrom + creme | borda mostarda |
 
-As áreas alternam: hero laranja, linha marrom, cardápio laranja, "Como pedir" marrom, "Onde estamos" laranja, rodapé marrom. O cardápio fica no laranja porque é a seção mais longa.
+As áreas alternam: hero laranja, faixa marrom, cardápio laranja, "Como pedir" marrom, "Onde estamos" laranja, rodapé marrom. O cardápio fica no laranja porque é a seção mais longa.
 
 ### Imagens dos pratos
-Cinco imagens geradas por IA, recortadas com fundo transparente e listadas em `CREDITOS.md`. O hambúrguer clássico abre o hero e passa da linha marrom. No cardápio, os cinco formam uma fileira de mesma altura, apoiados na mesma linha, só com imagem, nome e frase; o preço fica na lista por categorias logo abaixo. A sombra suave existe só nesses recortes, para assentá-los no laranja. "Como pedir" e "Onde estamos" ficam sem imagem de prato.
+Cinco imagens geradas por IA, recortadas com fundo transparente e listadas em `CREDITOS.md`. O hambúrguer clássico abre o hero e fica inteiro dentro dele, com folga antes da faixa. No cardápio, os cinco formam uma fileira de mesma altura, apoiados na mesma linha, só com imagem, nome e frase; o preço fica na lista por categorias logo abaixo. A sombra suave existe só nesses recortes, para assentá-los no laranja. "Como pedir" e "Onde estamos" ficam sem imagem de prato.
 
-Medição por screenshot, contando só as áreas nas 3 cores da paleta. Página inicial: 320 px = 64% laranja, 28% marrom, 8% mostarda; 375 px = 65/26/9; 1280 px = 69/25/6. Página do prato (Alex Clássico): 375 px = 68/32/1; 1280 px = 75/25/0. Nela a mostarda aparece só no preço, nos traços e nas estrelas, então a proporção fica abaixo do alvo.
+Medição por screenshot com a faixa divisória, contando só as áreas nas 3 cores da paleta. Página inicial: 375 px = 65% laranja, 27% marrom, 9% mostarda; 1280 px = 68/26/5. Página do prato (Alex Clássico): 375 px = 66/33/1; 1280 px = 73/27/0. Nela a mostarda aparece só no preço, nos traços e nas estrelas, então a proporção fica abaixo do alvo.
+
+### Faixa divisória
+Componente único (`.faixa`), usado entre o hero e o cardápio e entre o detalhe do prato e "Veja também". Fundo marrom, frases em creme, caixa-alta e fonte de título (15,21:1), estrelas mostarda (10,94:1). As frases vêm de `js/dados.js`. Corre devagar da direita para a esquerda, em loop, e para com o mouse em cima ou com foco pelo teclado. A primeira lista é lida pelo leitor de tela; as cópias têm `aria-hidden`. Com `prefers-reduced-motion`, fica parada, com uma única lista que quebra linha.
 
 ### Fileira de pratos
 Nome em `--texto-prato`, traço mostarda de 2,5rem por 4px com contorno marrom (a mostarda sobre o laranja tem só 1,98:1, então o traço é decorativo e precisa do contorno) e frase em marrom, peso 500. O nome é um link para `prato.html?item=id`, e a área de clique cobre o item inteiro. No hover, a imagem sobe 6px com sombra maior; ao pressionar, cresce 8% e inclina 4°, só com CSS, sem atrasar a navegação. Tudo usa `translate`, `scale` e `rotate`, que não mexem no layout, e fica desligado com `prefers-reduced-motion`.

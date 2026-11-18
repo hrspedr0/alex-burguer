@@ -4,6 +4,9 @@
 import { linkDoPrato } from "./pratos.js";
 
 const TAMANHO_NA_FILEIRA = "(min-width: 60em) 13rem, (min-width: 48em) 30vw, 45vw";
+const SVG = "http://www.w3.org/2000/svg";
+const FORMA_DA_ESTRELA = "M12 2l3 6.6 7.2.8-5.4 4.8 1.5 7.1-6.3-3.6-6.3 3.6 1.5-7.1-5.4-4.8 7.2-.8z";
+const GRUPOS_DA_FAIXA = 8; // cópias suficientes para cobrir telas muito largas
 
 export function criar(tag, classe, texto) {
   const elemento = document.createElement(tag);
@@ -16,6 +19,40 @@ export function preencherCampos(dados) {
   document.querySelectorAll("[data-campo]").forEach((elemento) => {
     elemento.textContent = dados[elemento.dataset.campo];
   });
+}
+
+export function criarEstrela(classe) {
+  const svg = document.createElementNS(SVG, "svg");
+  svg.setAttribute("class", classe);
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("aria-hidden", "true");
+  const forma = document.createElementNS(SVG, "path");
+  forma.setAttribute("d", FORMA_DA_ESTRELA);
+  svg.append(forma);
+  return svg;
+}
+
+function criarGrupoDaFaixa(frases, copia) {
+  const grupo = criar("ul", "faixa__grupo");
+  if (copia) grupo.setAttribute("aria-hidden", "true");
+  grupo.append(
+    ...frases.map((frase) => {
+      const item = criar("li", "faixa__item", frase);
+      item.append(criarEstrela("faixa__estrela"));
+      return item;
+    }),
+  );
+  return grupo;
+}
+
+/** A primeira lista é lida pelo leitor de tela; as cópias só completam o movimento. */
+export function montarFaixa(container, dados) {
+  const frases = [...dados.chamadas, dados.cidade];
+  const trilha = criar("div", "faixa__trilha");
+  for (let i = 0; i < GRUPOS_DA_FAIXA; i++) trilha.append(criarGrupoDaFaixa(frases, i > 0));
+  container.append(trilha);
+  // Com movimento, o foco pelo teclado é a forma de pausar a faixa.
+  if (matchMedia("(prefers-reduced-motion: no-preference)").matches) container.tabIndex = 0;
 }
 
 export function criarImagemDoPrato({ imagem, menor, largura, altura, alt }, { classe, tamanhos, prioritaria = false }) {

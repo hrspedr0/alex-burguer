@@ -3,7 +3,7 @@
 
 import dados from "./dados.js";
 import { statusDaLoja, horaNaLoja, paraMinutos, formatarHora, DIAS, NOMES_DIAS } from "./horario.js";
-import { criar, montarFileira, preencherCampos } from "./interface.js";
+import { criar, montarFaixa, montarFileira, preencherCampos } from "./interface.js";
 import { formatarPreco, linkWhatsApp, listarPratos } from "./pratos.js";
 
 const ORDEM_DA_SEMANA = ["segunda", "terca", "quarta", "quinta", "sexta", "sabado", "domingo"];
@@ -88,6 +88,7 @@ function manterHorarioAtualizado(selo, horarios) {
 
 preencherCampos(dados);
 preencherLinks();
+montarFaixa(document.querySelector("[data-faixa]"), dados);
 montarFileira(document.querySelector("[data-destaques]"), listarPratos(dados.cardapio));
 montarCardapio(document.querySelector("[data-cardapio]"));
 manterHorarioAtualizado(document.querySelector("[data-selo]"), document.querySelector("[data-horarios]"));

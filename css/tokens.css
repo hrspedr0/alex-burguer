@@ -40,6 +40,8 @@
   --texto-3: clamp(2.75rem, 1.8rem + 4.5vw, 5.5rem);            /* título principal curto */
   --texto-prato: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);        /* nome na fileira de pratos */
   --texto-frase-prato: clamp(0.95rem, 0.92rem + 0.15vw, 1rem);  /* frase na fileira de pratos */
+  --texto-faixa: clamp(1rem, 0.92rem + 0.4vw, 1.25rem);         /* frases da faixa divisória */
+  --espacamento-faixa: 0.04em;
   --texto-hero: clamp(2rem, 1.2rem + 3vw, 3.75rem);             /* título do hero (frase longa) */
 
   --entrelinha-texto: 1.55;
@@ -61,7 +63,6 @@
   --borda: 2px;             /* bordas e linha pontilhada do cardápio */
   --foco-largura: 3px;
   --foco-afastamento: 2px;
-  --borda-chapa: 0.5rem;    /* linha marrom entre o hero e o cardápio */
   --borda-fina: 1px;        /* contorno do traço mostarda sobre o laranja */
   --tamanho-oculto: 1px;    /* texto só para leitores de tela */
   --toque-min: 2.75rem;     /* 44 px */
@@ -75,12 +76,11 @@
   /* ---------- Pratos recortados (só eles têm sombra) ---------- */
   --largura-prato-hero: 32.5rem;          /* 520 px no desktop */
   --largura-prato-hero-celular: 15rem;    /* 240 px */
-  --avanco-prato-hero: 3rem;              /* quanto passa da borda do hero */
   --altura-prato: 8.75rem;                /* 140 px na fileira do celular */
   --altura-prato-desktop: 13.75rem;       /* 220 px na fileira do desktop */
   --altura-prato-detalhe-celular: 17.5rem; /* imagem na página do prato */
   --altura-prato-detalhe: 32.5rem;
-  --tamanho-estrela: 1.1rem;
+  --tamanho-estrela: 1.1rem;              /* também na faixa divisória */
   --traco-estrela: 1.2;
   --sombra-prato: drop-shadow(0 0.5rem 0.625rem rgb(43 24 16 / 0.35));
   --sombra-prato-destaque: drop-shadow(0 0.875rem 0.875rem rgb(43 24 16 / 0.42));
@@ -95,6 +95,7 @@
   --curva-prato: cubic-bezier(0.22, 1, 0.36, 1);
   --escala-pulo: 1.08;
   --giro-pulo: 4deg;
+  --duracao-faixa: 36s;                   /* uma volta de cada grupo de frases */
   --duracao-hover-prato: 180ms;
   --subida-prato: 0.375rem;               /* 6 px no hover */
 }
