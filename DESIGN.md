@@ -59,7 +59,7 @@ Consequência: **sobre o laranja só existe uma cor de texto, o marrom**. A hier
 
 - **Bricolage Grotesque 800** (`--fonte-titulo`): grotesca de contraste irregular, com cara de letreiro pintado à mão. No peso extra-bold ela vira massa, que é o que o logo "alex" precisa (letras como a carne do hambúrguer).
 - **Figtree 400/500/700** (`--fonte-texto`): geométrica simples e muito legível em tela pequena, para preços e descrições. Não compete com o título.
-- Carregadas pelo Google Fonts com `display=swap`. Escala fluida com `clamp()` de 320 px a 1280 px. Texto corrido limitado a `65ch`.
+- Hospedadas no próprio site (`assets/fonts/`, só o recorte latino, licença OFL), com `font-display: swap` e pré-carregamento dos dois arquivos. Antes vinham do Google Fonts: a troca não mudou nenhum pixel e tirou o único recurso de terceiros. Escala fluida com `clamp()` de 320 px a 1280 px. Texto corrido limitado a `65ch`.
 
 ## Forma
 
