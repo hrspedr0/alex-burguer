@@ -18,7 +18,7 @@ Hospedagem prevista: GitHub Pages.
 - Cores: laranja `#F26A1B`, marrom `#2B1810`, mostarda `#FFC83D`, creme `#FFF1DC`.
 - Texto sobre laranja é sempre marrom escuro. Nunca branco em texto pequeno (contraste insuficiente).
 - Botão sobre laranja: marrom com texto creme. Botão sobre marrom: mostarda com texto marrom.
-- Tipografia: títulos em Bricolage Grotesque (extra-bold), texto em Figtree, via Google Fonts com `font-display: swap`.
+- Tipografia: títulos em Bricolage Grotesque (extra-bold), texto em Figtree, hospedadas no próprio site (`assets/fonts/`, licença OFL) com `font-display: swap`.
 - Logo: a palavra "alex" em minúsculas pesadas, como o hambúrguer: pão de cima com gergelim, letras como a carne, pão de baixo. Em SVG.
 - Elemento memorável: selo "aberto agora / abre às 18h" que muda pelo horário (fuso America/Sao_Paulo).
 - Cardápio como lista com linha pontilhada até o preço (estilo comanda), e não grade de cards iguais.
@@ -34,7 +34,7 @@ Hospedagem prevista: GitHub Pages.
 ## Evitar o visual genérico de IA
 Não usar: gradiente roxo/azul, fundo creme com acento terracota, grade de cards idênticos com sombra suave, Inter/Roboto/Arial como fonte principal, emojis no lugar de ícones, hero com título + subtítulo + dois botões genéricos, rótulo pequeno em caixa-alta antes de todo título, numeração 01/02/03 sem sequência real, animação de entrada em toda seção, textos vazios ("Soluções inovadoras").
 Botões dizem o que acontece: "Pedir no WhatsApp", não "Enviar".
-Movimento só em um momento, e sempre respeitando `prefers-reduced-motion`.
+Movimento: selo ao carregar e pratos ao interagir (a faixa divisória corre devagar e para com mouse ou foco). Sempre respeitando `prefers-reduced-motion`.
 
 ## Piso de qualidade
 - Celular primeiro. Funciona de 320 px até desktop.
