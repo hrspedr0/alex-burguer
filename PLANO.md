@@ -25,6 +25,17 @@ Faça um passo por vez, confira o resultado no navegador e só então avance. Se
 
 Pronto quando: a pasta tem os 3 arquivos e o Git mostra a branch `feat/site-inicial`.
 
+## Andamento (19/11/2026)
+- Passos 1 a 9 feitos na branch `feat/site-inicial`, com um commit por assunto.
+- Mudanças em relação ao roteiro original:
+  - o Passo 7 foi refeito com imagens geradas por IA (Gemini) no lugar das fotos de banco;
+  - entraram a página de detalhe do prato (`prato.html`), a faixa divisória animada e a página 404;
+  - as fontes passaram a ser hospedadas no próprio site;
+  - o site usa `noindex`, por ser um negócio fictício. Por isso não tem `sitemap.xml`;
+  - não tem JSON-LD `Restaurant`, para não apresentar endereço e telefone inventados como reais.
+- Lighthouse no celular, depois do Passo 9: início 98 e prato 96 em desempenho; 100 em acessibilidade e boas práticas. O SEO fica em 69 só por causa do `noindex`, de propósito.
+- Próximo: Passo 10 (publicação), em separado. O README já está pronto.
+
 ---
 
 ## Passo 1: estrutura e Git
@@ -188,6 +199,13 @@ Entregue os achados por gravidade, corrija os seguros e me diga o que ficou sem 
 Pronto quando: lista de achados resolvida e nada sensível no histórico do Git.
 Commit: `chore: revisão de segurança, SEO e desempenho`
 
+Feito (19/11/2026), com estas diferenças:
+- noindex em vez de indexar, então sem `sitemap.xml`;
+- sem JSON-LD com dados fictícios;
+- fontes no próprio site, em vez de `preconnect`;
+- CSP e política de referência por `<meta>`;
+- página 404.
+
 ---
 
 ## Passo 10: README e publicação
@@ -206,15 +224,15 @@ Commit: `docs: README e instruções de publicação`
 ---
 
 ## Checklist final
-- [ ] Botão de WhatsApp abre o link certo (com a mensagem pronta)
-- [ ] Selo de aberto/fechado correto em horários diferentes
-- [ ] Nenhuma cor, fonte ou tamanho solto fora do `tokens.css`
-- [ ] Contraste de texto acima de 4,5:1
-- [ ] Funciona de 320 px a desktop e só com teclado
-- [ ] Imagens leves, com `alt` e créditos
-- [ ] Testes passando
-- [ ] Nada sensível no Git
-- [ ] Aviso de projeto fictício visível
+- [x] Botão de WhatsApp abre o link certo, com a mensagem pronta (link conferido; o número é placeholder)
+- [x] Selo de aberto/fechado correto em horários diferentes
+- [x] Nenhuma cor, fonte ou tamanho solto fora do `tokens.css`
+- [x] Contraste de texto acima de 4,5:1
+- [x] Funciona de 320 px a desktop e só com teclado
+- [x] Imagens leves, com `alt` e créditos
+- [x] Testes passando
+- [ ] Nada sensível no Git: o código está limpo, mas os commits antigos têm o e-mail pessoal como autor (decidido não reescrever o histórico)
+- [x] Aviso de projeto fictício visível
 
 ## Fase 2 (fora do escopo agora)
 Pedido online com carrinho, pagamento, painel para editar o cardápio e analytics real. Só planejar depois que a fase 1 estiver publicada.
