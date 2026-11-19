@@ -538,6 +538,11 @@ a {
 }
 
 /* ---------- Página do prato ---------- */
+/* Enquanto o prato não foi montado, o rodapé também fica oculto: assim ele não salta para baixo */
+main[hidden] ~ .rodape {
+  display: none;
+}
+
 .detalhe__voltar {
   display: inline-flex;
   align-items: center;
