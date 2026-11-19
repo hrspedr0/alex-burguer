@@ -6,6 +6,7 @@ import { linkDoPrato } from "./pratos.js";
 const TAMANHO_NA_FILEIRA = "(min-width: 60em) 13rem, (min-width: 48em) 30vw, 45vw";
 const SVG = "http://www.w3.org/2000/svg";
 const FORMA_DA_ESTRELA = "M12 2l3 6.6 7.2.8-5.4 4.8 1.5 7.1-6.3-3.6-6.3 3.6 1.5-7.1-5.4-4.8 7.2-.8z";
+const SECOES_MARRONS = ".secao--marrom, .faixa, .rodape, .cabecalho";
 const GRUPOS_DA_FAIXA = 8; // cópias suficientes para cobrir telas muito largas
 
 export function criar(tag, classe, texto) {
@@ -88,4 +89,50 @@ export function montarFileira(container, pratos) {
   container.append(...pratos.map(criarItemDaFileira));
   // Em alguns celulares, o :active só funciona com um ouvinte de toque na página.
   document.addEventListener("touchstart", () => {}, { passive: true });
+}
+
+/**
+ * Botão de pedido fixo no celular: usa a variante mostarda sobre fundo marrom
+ * e some enquanto algum dos elementos de "ocultarCom" (outro botão de pedido) está na tela.
+ */
+export function acompanharBotaoFixo(botao, { ocultarCom = [] } = {}) {
+  if (!botao) return;
+  const celular = matchMedia("(max-width: 47.99em)");
+  const visiveis = new Set();
+  let agendado = false;
+
+  const atualizarFundo = () => {
+    agendado = false;
+    if (!celular.matches || getComputedStyle(botao).position !== "fixed") {
+      botao.classList.remove("esta-sobre-marrom");
+      return;
+    }
+    const r = botao.getBoundingClientRect();
+    const atras = document.elementsFromPoint(r.left + r.width / 2, r.top + r.height / 2).find((e) => !botao.contains(e));
+    botao.classList.toggle("esta-sobre-marrom", Boolean(atras?.closest(SECOES_MARRONS)));
+  };
+  const agendar = () => {
+    if (!agendado) {
+      agendado = true;
+      requestAnimationFrame(atualizarFundo);
+    }
+  };
+  const atualizarVisibilidade = () => {
+    botao.classList.toggle("esta-oculto", celular.matches && visiveis.size > 0);
+  };
+
+  if (ocultarCom.length) {
+    const observador = new IntersectionObserver((entradas) => {
+      for (const e of entradas) e.isIntersecting ? visiveis.add(e.target) : visiveis.delete(e.target);
+      atualizarVisibilidade();
+    });
+    ocultarCom.forEach((el) => observador.observe(el));
+  }
+  addEventListener("scroll", agendar, { passive: true });
+  addEventListener("resize", agendar);
+  celular.addEventListener("change", () => {
+    atualizarVisibilidade();
+    agendar();
+  });
+  agendar();
 }

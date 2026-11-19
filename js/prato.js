@@ -1,7 +1,7 @@
 // Ponto de entrada do prato.html: monta a página do prato indicado em ?item=.
 
 import dados from "./dados.js";
-import { criar, criarEstrela, criarImagemDoPrato, montarFaixa, montarFileira, preencherCampos } from "./interface.js";
+import { acompanharBotaoFixo, criar, criarEstrela, criarImagemDoPrato, montarFaixa, montarFileira, preencherCampos } from "./interface.js";
 import { encontrarPrato, formatarPreco, linkPedidoDoPrato, outrosPratos } from "./pratos.js";
 
 const DESTINO_SEM_PRATO = "index.html#cardapio";
@@ -39,6 +39,7 @@ function montarPagina(prato) {
   campo("pedido").href = linkPedidoDoPrato(dados, prato.id);
   montarFileira(campo("outros"), outrosPratos(dados.cardapio, prato.id));
   document.querySelector("main").hidden = false;
+  acompanharBotaoFixo(campo("pedido"));
 }
 
 const prato = encontrarPrato(dados.cardapio, new URLSearchParams(location.search).get("item"));

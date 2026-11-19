@@ -834,6 +834,26 @@ a {
     outline-offset: calc(-2 * var(--foco-largura));
   }
 
+  /* Sobre fundo marrom: variante mostarda com texto marrom (js/interface.js) */
+  .botao-fixo.esta-sobre-marrom,
+  .botao--fixo-celular.esta-sobre-marrom,
+  .botao-fixo.esta-sobre-marrom:hover,
+  .botao--fixo-celular.esta-sobre-marrom:hover {
+    border-color: var(--cor-acento);
+    background: var(--cor-acento);
+    color: var(--cor-texto);
+  }
+
+  .botao-fixo.esta-sobre-marrom:focus-visible,
+  .botao--fixo-celular.esta-sobre-marrom:focus-visible {
+    outline-color: var(--cor-superficie);
+  }
+
+  /* Some enquanto outro botão de pedido está na tela */
+  .botao-fixo.esta-oculto {
+    visibility: hidden;
+  }
+
   /* Espaço para o botão fixo não cobrir o fim do rodapé */
   .rodape {
     padding-bottom: calc(var(--espaco-6) + var(--toque-min) + var(--espaco-4));
