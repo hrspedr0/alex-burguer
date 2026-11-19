@@ -63,6 +63,9 @@ a {
   z-index: 20;
   left: var(--espaco-3);
   top: calc(-1 * var(--espaco-7));
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--toque-min);
   padding: var(--espaco-2) var(--espaco-3);
   background: var(--cor-superficie);
   color: var(--cor-texto-inverso);
