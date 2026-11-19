@@ -16,27 +16,49 @@ Os valores vivem em `css/tokens.css`. Este arquivo explica o porquê.
 | `--cor-apoio` | `#C9AE8C` kraft | texto secundário sobre marrom | - |
 | `--cor-destaque` | `#F26A1B` | realce de texto dentro de áreas marrons | - |
 
-### Pares testados (WCAG 2.x, calculados por script)
+### Pares testados (WCAG 2.x, recalculados por script em 19/11/2026)
 
-| Texto / elemento | Fundo | Contraste | Resultado | Uso |
+**Texto** (mínimo 4,5:1; 3:1 para texto grande)
+
+| Texto | Fundo | Contraste | Resultado | Onde aparece |
 |---|---|---|---|---|
-| marrom `#2B1810` | laranja `#F26A1B` | 5,52:1 | passa AA | texto corrido, títulos, **descrições do cardápio** (`--texto-menor`), **frase da fileira de pratos** (`--texto-frase-prato`, peso 500), **descrição, ingredientes e link de voltar da página do prato**, pontilhado, foco |
-| creme `#FFF1DC` | marrom `#2B1810` | 15,21:1 | passa AAA | texto em faixas marrons, **faixa divisória** (`--texto-faixa`, caixa-alta), botão sobre laranja, dia de hoje nos horários |
-| mostarda `#FFC83D` | marrom `#2B1810` | 10,94:1 | passa AAA | preço/realce em áreas marrons, estrela da faixa divisória, foco sobre marrom |
-| marrom `#2B1810` | mostarda `#FFC83D` | 10,94:1 | passa AAA | texto do botão mostarda, selo, etiqueta de preço, quadro de horários |
-| kraft `#C9AE8C` | marrom `#2B1810` | 7,99:1 | passa AAA | **aviso do rodapé** (`--texto-menor`) |
-| laranja `#F26A1B` | marrom `#2B1810` | 5,52:1 | passa AA | destaque de texto dentro de área marrom |
+| marrom `#2B1810` | laranja `#F26A1B` | 5,52:1 | passa AA | texto corrido, títulos, descrições do cardápio, frase da fileira, nota "Imagens geradas por IA", descrição, ingredientes e "Voltar ao cardápio" na página do prato |
+| creme `#FFF1DC` | marrom `#2B1810` | 15,21:1 | passa AAA | menu do cabeçalho, "Como pedir", rodapé, **faixa divisória**, botão primário e botão fixo sobre laranja, "Pular para o conteúdo", dia de hoje nos horários |
+| marrom `#2B1810` | mostarda `#FFC83D` | 10,94:1 | passa AAA | **selo aberto**, etiqueta de preço, quadro de horários, marcador dos passos, botão sobre marrom, **botão fixo sobre marrom**, hover do botão primário |
+| marrom `#2B1810` | kraft `#C9AE8C` | 7,99:1 | passa AAA | **selo fechado** |
+| kraft `#C9AE8C` | marrom `#2B1810` | 7,99:1 | passa AAA | aviso do rodapé (`--texto-menor`) |
+| mostarda `#FFC83D` | marrom `#2B1810` | 10,94:1 | passa AAA | hover do menu do cabeçalho, hover do botão sobre marrom |
+
+**Elementos que não são texto** (mínimo 3:1 contra o que está em volta)
+
+| Elemento | Contra | Contraste | Resultado | Onde aparece |
+|---|---|---|---|---|
+| anel de foco marrom | laranja | 5,52:1 | passa | links, pratos da fileira e botões nas áreas laranja |
+| anel de foco mostarda | marrom | 10,94:1 | passa | cabeçalho, faixa, "Como pedir", rodapé, botão fixo (por dentro) |
+| anel de foco marrom | mostarda | 10,94:1 | passa | botão fixo na variante mostarda (por dentro) |
+| estrela mostarda | marrom | 10,94:1 | passa | faixa divisória |
+| borda marrom | laranja | 5,52:1 | passa | botões, selo, etiquetas de preço, quadro de horários, linha pontilhada, contorno das estrelas e do traço |
+| botão fixo mostarda | marrom | 10,94:1 | passa | variante sobre seções marrons |
+| estrela e traço mostarda (preenchimento) | laranja | 1,98:1 | decorativo | só aparecem com contorno marrom, que dá o contraste de 5,52:1 |
+| selo kraft (preenchimento) | laranja | 1,45:1 | decorativo | o contorno marrom do selo dá o contraste; o texto do selo passa (7,99:1) |
+
+**Proibidos**
+
+| Texto / elemento | Fundo | Contraste | Resultado | Regra |
+|---|---|---|---|---|
 | creme `#FFF1DC` | laranja `#F26A1B` | 2,75:1 | **reprovado** | proibido |
 | branco `#FFFFFF` | laranja `#F26A1B` | 3,06:1 | **reprovado** para texto normal | proibido (regra do projeto) |
-| mostarda `#FFC83D` | laranja `#F26A1B` | 1,98:1 | **reprovado** até para borda (3:1) | proibido; mostarda sobre laranja só com borda marrom |
+| mostarda `#FFC83D` | laranja `#F26A1B` | 1,98:1 | **reprovado** até para borda (3:1) | mostarda sobre laranja só com borda marrom |
 | `#4A2A1A` / `#5C3422` | laranja | 4,19 / 3,48:1 | **reprovado** | descartados como "apoio" sobre laranja |
+
+O token `--cor-destaque` (laranja sobre marrom, 5,52:1) segue definido, mas não é usado em nenhum componente.
 
 Consequência: **sobre o laranja só existe uma cor de texto, o marrom**. A hierarquia ali vem de tamanho e peso, não de um cinza mais claro.
 
 ## Tipografia
 
 - **Bricolage Grotesque 800** (`--fonte-titulo`): grotesca de contraste irregular, com cara de letreiro pintado à mão. No peso extra-bold ela vira massa, que é o que o logo "alex" precisa (letras como a carne do hambúrguer).
-- **Figtree 400/700** (`--fonte-texto`): geométrica simples e muito legível em tela pequena, para preços e descrições. Não compete com o título.
+- **Figtree 400/500/700** (`--fonte-texto`): geométrica simples e muito legível em tela pequena, para preços e descrições. Não compete com o título.
 - Carregadas pelo Google Fonts com `display=swap`. Escala fluida com `clamp()` de 320 px a 1280 px. Texto corrido limitado a `65ch`.
 
 ## Forma
@@ -94,6 +116,9 @@ Nome em `--texto-prato`, traço mostarda de 2,5rem por 4px com contorno marrom (
 
 ### Página do prato (`prato.html`)
 Modelo único preenchido por `js/prato.js`: voltar, imagem recortada, nome com traço, descrição, preço, ingredientes, pedido e "Veja também". Os ingredientes são trechos da descrição, separados por estrelas mostarda com contorno marrom, decorativas. Há um só botão de pedido, com a mensagem do prato: no desktop fica no texto; no celular fixa no rodapé da tela, mantendo a mesma posição na ordem do teclado.
+
+### Acessibilidade e responsividade (conferido em 19/11/2026)
+Chrome em 320, 375, 768, 1024 e 1440 px, nas duas páginas: sem rolagem lateral, texto cortado ou sobreposto. Um único `h1` por página, títulos em ordem, `header`, `main` e `footer`, `alt` em todas as imagens, áreas de toque de pelo menos 44 px. Com Tab, a primeira parada é "Pular para o conteúdo", a ordem segue o HTML e todo item interativo (links, pratos, botões, faixa) tem anel de foco de 3 px. No celular, o botão fixo de pedido usa a variante mostarda sobre fundo marrom e some enquanto o botão do hero ou do rodapé está na tela. No desktop, as categorias do cardápio são distribuídas em duas colunas de altura parecida (`js/colunas.js`), sem partir nenhuma e sem mudar a ordem no HTML.
 
 ### Componentes (`css/componentes.css`)
 - **Botão primário**: sobre laranja, marrom + creme (hover: mostarda + marrom); sobre marrom, mostarda + marrom (hover: só contorno mostarda). **Secundário**: contorno marrom (hover: preenchido). **Desativado**: tracejado, sem preenchimento.
