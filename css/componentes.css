@@ -617,6 +617,23 @@ a {
   stroke-linejoin: round;
 }
 
+/* ---------- Página 404 ---------- */
+.erro {
+  display: grid;
+  justify-items: start;
+  gap: var(--espaco-4);
+}
+
+.erro__titulo {
+  font-size: var(--texto-hero);
+}
+
+.erro__texto {
+  max-width: var(--largura-texto);
+  font-size: var(--texto-1);
+  line-height: var(--entrelinha-texto);
+}
+
 /* ---------- Cardápio estilo comanda ---------- */
 .cardapio {
   display: grid;

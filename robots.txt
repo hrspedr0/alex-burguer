@@ -1,0 +1,7 @@
+# Alex Burguer: projeto de portfólio, negócio fictício.
+# Nada é bloqueado aqui de propósito: as páginas usam <meta name="robots" content="noindex">,
+# e o buscador precisa conseguir abrir cada página para ler esse aviso.
+# Observação: num site de projeto do GitHub Pages (usuario.github.io/repositorio/), os buscadores
+# só leem o robots.txt da raiz do domínio. Este arquivo documenta a intenção; quem faz o trabalho é o noindex.
+User-agent: *
+Allow: /
