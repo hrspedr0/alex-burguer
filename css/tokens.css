@@ -67,6 +67,7 @@
   --tamanho-oculto: 1px;    /* texto só para leitores de tela */
   --toque-min: 2.75rem;     /* 44 px */
   --largura-max: 72rem;
+  --passo-colunas: 1px;     /* linha da grade usada para empilhar as categorias do cardápio */
 
   /* ---------- Marca ---------- */
   --altura-simbolo: 2.75rem;      /* ilustração no cabeçalho */

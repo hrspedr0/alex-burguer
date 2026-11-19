@@ -921,15 +921,22 @@ a {
     height: var(--altura-prato-desktop);
   }
 
-  /* Duas colunas equilibradas, mantendo a ordem das categorias */
+  /* Duas colunas; js/colunas.js escolhe a divisão mais equilibrada.
+     A ordem no HTML (e no celular) não muda: só a posição na grade. */
   .cardapio {
-    display: block;
-    columns: 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
     column-gap: var(--espaco-7);
   }
 
-  .comanda {
-    break-inside: avoid;
+  .cardapio.esta-equilibrado {
+    grid-auto-rows: var(--passo-colunas);
+    row-gap: 0;
+  }
+
+  .cardapio.esta-equilibrado > .comanda {
+    grid-column: var(--coluna);
+    grid-row: var(--linha) / span var(--linhas);
     padding-bottom: var(--espaco-6);
   }
 

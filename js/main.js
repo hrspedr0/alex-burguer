@@ -5,6 +5,7 @@ import dados from "./dados.js";
 import { statusDaLoja, horaNaLoja, paraMinutos, formatarHora, DIAS, NOMES_DIAS } from "./horario.js";
 import { acompanharBotaoFixo, criar, montarFaixa, montarFileira, preencherCampos } from "./interface.js";
 import { formatarPreco, linkWhatsApp, listarPratos } from "./pratos.js";
+import { dividirEmColunas } from "./colunas.js";
 
 const ORDEM_DA_SEMANA = ["segunda", "terca", "quarta", "quinta", "sexta", "sabado", "domingo"];
 
@@ -52,6 +53,38 @@ function montarCardapio(container) {
   });
 }
 
+// No desktop, empilha as categorias em duas colunas de altura parecida, sem partir nenhuma.
+function equilibrarCardapio(container) {
+  const desktop = matchMedia("(min-width: 60em)");
+  const blocos = [...container.children];
+  let agendado = false;
+  const aplicar = () => {
+    agendado = false;
+    container.classList.toggle("esta-equilibrado", desktop.matches);
+    if (!desktop.matches) return;
+    const alturas = blocos.map((b) => Math.ceil(b.getBoundingClientRect().height));
+    const colunas = dividirEmColunas(alturas, 2);
+    const topo = [1, 1];
+    blocos.forEach((bloco, i) => {
+      const c = colunas[i];
+      bloco.style.setProperty("--coluna", c + 1);
+      bloco.style.setProperty("--linha", topo[c]);
+      bloco.style.setProperty("--linhas", alturas[i]);
+      topo[c] += alturas[i];
+    });
+  };
+  const agendar = () => {
+    if (!agendado) {
+      agendado = true;
+      requestAnimationFrame(aplicar);
+    }
+  };
+  const observador = new ResizeObserver(agendar);
+  blocos.forEach((b) => observador.observe(b));
+  desktop.addEventListener("change", agendar);
+  aplicar();
+}
+
 function montarHorarios(container, agora) {
   const hoje = DIAS[horaNaLoja(agora).dia];
   const linhas = ORDEM_DA_SEMANA.map((chave) => {
@@ -91,6 +124,7 @@ preencherLinks();
 montarFaixa(document.querySelector("[data-faixa]"), dados);
 montarFileira(document.querySelector("[data-destaques]"), listarPratos(dados.cardapio));
 montarCardapio(document.querySelector("[data-cardapio]"));
+equilibrarCardapio(document.querySelector("[data-cardapio]"));
 manterHorarioAtualizado(document.querySelector("[data-selo]"), document.querySelector("[data-horarios]"));
 acompanharBotaoFixo(document.querySelector(".botao-fixo"), {
   ocultarCom: [...document.querySelectorAll(".hero .botao, .rodape .botao")],
