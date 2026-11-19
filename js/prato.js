@@ -2,9 +2,10 @@
 
 import dados from "./dados.js";
 import { acompanharBotaoFixo, criar, criarEstrela, criarImagemDoPrato, montarFaixa, montarFileira, preencherCampos } from "./interface.js";
-import { encontrarPrato, formatarPreco, linkPedidoDoPrato, outrosPratos } from "./pratos.js";
+import { encontrarPrato, formatarPreco, linkDoPrato, linkPedidoDoPrato, outrosPratos } from "./pratos.js";
 
 const DESTINO_SEM_PRATO = "index.html#cardapio";
+const ENDERECO_DO_SITE = "https://hrspedr0.github.io/alex-burguer/";
 const TAMANHO_DA_IMAGEM = "(min-width: 48em) 32.5rem, calc(100vw - 2rem)";
 
 function campo(nome) {
@@ -22,7 +23,8 @@ function atualizarCabecalhoDoDocumento(prato) {
   document.title = `${prato.nome} | ${dados.nome}`;
   document
     .querySelector('meta[name="description"]')
-    .setAttribute("content", `${prato.nome}: ${prato.descricao} ${dados.nome}, ${dados.cidade}.`);
+    .setAttribute("content", `${prato.nome}: ${prato.descricao} ${dados.nome}, ${dados.cidade}. Projeto de portfólio, negócio fictício.`);
+  document.querySelector('link[rel="canonical"]').href = ENDERECO_DO_SITE + linkDoPrato(prato.id);
 }
 
 function montarPagina(prato) {
